@@ -5,7 +5,198 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>מדריך להתערבות בשעת חירום – שפ״ח קריית ים</title>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="booklet.css">
+<style>
+@page { size:A4; margin:0; }
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:'Heebo',sans-serif; background:#dce4e8; color:#1f2d3a; direction:rtl; }
+
+.page {
+  width:210mm; height:297mm; background:#fff;
+  margin:0 auto 40px; overflow:hidden;
+  display:flex; flex-direction:column;
+  box-shadow:0 2px 4px rgba(0,0,0,.07),0 8px 24px rgba(0,0,0,.13),0 20px 50px rgba(0,0,0,.10);
+}
+
+/* Header */
+.header {
+  background:linear-gradient(160deg,#1B3461 0%,#1D4A8A 30%,#2B5BA8 65%,#3A72C0 100%);
+  color:#fff; padding:14px 26px; font-size:20px; font-weight:800;
+  flex-shrink:0; display:flex; align-items:center; gap:10px;
+  border-bottom:4px solid #F0B429;
+}
+.header .phase {
+  font-size:11px; font-weight:600; background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.4); color:#fff;
+  padding:3px 10px; border-radius:20px; white-space:nowrap;
+  margin-right:auto;
+}
+
+/* Body */
+.body { flex:1; padding:18px 26px 14px; overflow:hidden; display:flex; flex-direction:column; gap:11px; }
+
+/* Cards */
+.card { background:#f2f8fb; border-right:5px solid #2B5BA8; padding:12px 15px; border-radius:8px; font-size:15px; line-height:1.75; text-align:justify; text-align-last:right; }
+.card strong { color:#1B3461; }
+.card-gold  { border-right-color:#F0B429; background:#fffbf0; text-align:justify; text-align-last:right; }
+.card-green { border-right-color:#2D9B6F; background:#f0faf5; }
+.card-red   { border-right-color:#c0392b; background:#fdf5f5; }
+.card-purple{ border-right-color:#7B4FA6; background:#f8f3fd; }
+
+/* Grid */
+.grid2 { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.grid3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+.grid4 { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:10px; }
+
+/* Section title */
+.sec  { font-size:16px; font-weight:800; color:#1B3461; border-bottom:2px solid #d0e4f0; padding-bottom:5px; }
+.sec-sm { font-size:14px; font-weight:700; color:#2B5BA8; }
+
+/* Text */
+.txt { font-size:15px; line-height:1.85; text-align:justify; text-align-last:right; color:#1f2d3a; }
+
+/* Bubble */
+.bubble { background:#EBF2FA; border-right:5px solid #2B5BA8; border-radius:10px; padding:12px 15px; font-size:15px; line-height:1.8; }
+
+/* Important */
+.important { background:#FFF8E1; border:1.5px solid #F0C040; border-radius:10px; padding:12px 15px; font-size:14px; line-height:1.8; color:#4a3000; }
+.important .imp-t { font-size:14px; font-weight:800; color:#8a5a00; margin-bottom:5px; }
+
+/* Steps */
+.step-row { display:flex; align-items:flex-start; gap:12px; padding:9px 0; border-bottom:1px dashed #d0e4f0; font-size:15px; }
+.step-row:last-child { border-bottom:none; }
+.step-num { width:30px; height:30px; border-radius:50%; background:#2B5BA8; color:#fff; font-size:14px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.step-letter { width:30px; height:30px; border-radius:50%; background:#F0B429; color:#1B3461; font-size:14px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+
+/* Tag */
+.tag { display:inline-flex; align-items:center; gap:5px; background:#EBF2FA; border:1px solid #c0d8ee; border-radius:20px; padding:3px 11px; font-size:12px; font-weight:700; color:#1B3461; }
+.tag-gold { background:#fffbf0; border-color:#F0B429; color:#7a5a00; }
+
+/* Box highlight */
+.highlight-box {
+  background:linear-gradient(135deg,#1B3461,#2B5BA8);
+  border-radius:14px; padding:18px 20px; color:#fff; text-align:center;
+  font-size:17px; font-weight:800; line-height:1.5;
+}
+
+/* Letter box */
+.letter-box {
+  width:48px; height:48px; border-radius:50%;
+  background:linear-gradient(135deg,#2B5BA8,#1B3461);
+  color:#fff; font-size:20px; font-weight:900;
+  display:flex; align-items:center; justify-content:center; flex-shrink:0;
+}
+
+/* TOC item */
+.toc-item { display:flex; align-items:center; gap:12px; padding:9px 14px; border-bottom:1px solid #edf4f8; font-size:15px; font-weight:600; }
+.toc-item:last-child { border-bottom:none; }
+.toc-link { color:inherit; text-decoration:none; display:block; }
+.toc-link:hover { text-decoration:underline; }
+
+/* Phase badge */
+.phase-section { font-size:12px; font-weight:800; letter-spacing:.5px; text-transform:uppercase; color:#3a5060; margin-bottom:6px; padding-bottom:4px; border-bottom:1px solid #e0edf5; }
+
+/* Footer */
+.pf { background:#f0f5fb; border-top:2px solid #d0e4f0; padding:8px 26px; display:flex; align-items:center; justify-content:space-between; gap:14px; flex-shrink:0; }
+.pf-org { font-size:11px; font-weight:700; color:#1B3461; white-space:nowrap; }
+.pf-contacts { display:flex; align-items:center; gap:10px; }
+.pf-item { display:flex; align-items:center; gap:5px; font-size:10.5px; color:#1B3461; white-space:nowrap; font-weight:600; }
+.ci { width:22px; height:22px; border-radius:50%; background:linear-gradient(135deg,#2B5BA8,#1B3461); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+.ci svg { width:11px; height:11px; stroke:#fff; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+
+
+    .sense-row { display:flex; align-items:center; gap:14px; padding:10px 14px; border-bottom:1px dashed #d0e4f0; font-size:15px; }
+    .sense-row:last-child { border-bottom:none; }
+    .sense-num { width:34px; height:34px; border-radius:50%; background:#2B5BA8; color:#fff; font-size:17px; font-weight:800; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .steps { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .step { background:#EBF2FA; border-radius:10px; padding:13px; }
+    .step .sn { font-size:11px; font-weight:800; color:#2B5BA8; letter-spacing:.5px; text-transform:uppercase; margin-bottom:5px; }
+    .step p { font-size:15px; line-height:1.7; text-align:justify; text-align-last:right; }
+    .phone-card { background:#f2f8fb; border:1.5px solid #d0e4f0; border-radius:12px; padding:16px; text-align:center; }
+    .phone-card .pl { font-size:14px; color:#2d3e4a; margin-bottom:4px; }
+    .phone-card .pn { font-size:22px; font-weight:800; color:#1B3461; direction:ltr; }
+    .phone-em { background:#1B3461; border:none; }
+    .phone-em .pl { color:#fff; }
+    .phone-em .pn { color:#fff; font-size:30px; }
+    /* Print button */
+.print-btn { position:fixed; bottom:28px; left:28px; background:linear-gradient(135deg,#1B3461,#2B5BA8); color:#fff; border:none; border-radius:50px; padding:12px 22px; font-size:14px; font-weight:700; font-family:'Heebo',sans-serif; cursor:pointer; display:flex; align-items:center; gap:8px; box-shadow:0 4px 16px rgba(27,52,97,.35); z-index:9999; transition:transform .15s; }
+.print-btn:hover { transform:translateY(-2px); }
+.print-btn svg { width:17px; height:17px; stroke:#fff; fill:none; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+
+@media print {
+  body { background:#fff; }
+  .page { margin:0 !important; width:210mm !important; height:297mm !important; overflow:hidden; box-shadow:none; page-break-after:always; break-after:page; display:flex; flex-direction:column; }
+  .page:last-of-type { page-break-after:avoid; break-after:avoid; }
+  .body { overflow:hidden; }
+  .print-btn { display:none !important; }
+  * { -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }
+}
+
+
+/* ══ MOBILE RESPONSIVE ══ */
+@media screen and (max-width: 768px) {
+  body { background:#fff; }
+
+  .page {
+    width:100% !important;
+    height:auto !important;
+    min-height:unset !important;
+    margin:0 0 16px 0 !important;
+    box-shadow:0 2px 8px rgba(0,0,0,.10);
+    overflow:visible;
+  }
+
+  .body {
+    padding:14px 16px 12px;
+    overflow:visible;
+  }
+
+  .header {
+    padding:12px 16px;
+    font-size:16px;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+
+  .header .phase {
+    font-size:10px;
+    padding:2px 8px;
+  }
+
+  .grid2 { grid-template-columns:1fr !important; }
+  .grid3 { grid-template-columns:1fr !important; }
+  .grid4 { grid-template-columns:1fr 1fr !important; }
+
+  .steps { grid-template-columns:1fr !important; }
+  .step { grid-column:auto !important; }
+
+  .card { font-size:14px; }
+  .txt  { font-size:14px; }
+
+  .pf {
+    padding:8px 14px;
+    flex-wrap:wrap;
+    gap:6px;
+  }
+  .pf-contacts { flex-wrap:wrap; gap:6px; }
+
+  /* Cover page adjustments */
+  .page:first-of-type > div:nth-child(3) {
+    padding:12px 16px;
+  }
+  .page:first-of-type > div:nth-child(3) > div {
+    padding:24px 20px;
+  }
+  .page:first-of-type > div:nth-child(3) > div > div:first-child {
+    font-size:32px !important;
+  }
+
+  /* TOC adjustments */
+  .toc-item { font-size:13px; padding:7px 12px; }
+
+  /* Print button hidden on mobile */
+  .print-btn { display:none; }
+}
+</style>
 </head>
 <body>
 
@@ -39,59 +230,44 @@
 
 <!-- ══ תוכן עניינים ══ -->
 <div class="page">
-      <div class="header"> תוכן עניינים</div>
-  <div class="body" style="gap:8px">
-
-    <!-- מודלים -->
-    <div style="border-radius:12px;overflow:hidden;border:1.5px solid #d0e4f0">
-      <div style="background:linear-gradient(90deg,#2B5BA8,#4A90C4);padding:8px 14px;display:flex;align-items:center;gap:8px">
-        <span style="font-size:14px"></span>
-        <span style="font-size:15px;font-weight:800;color:#fff;letter-spacing:.3px">מודלים להתערבות בחירום</span>
+  <div class="header">📋 תוכן עניינים</div>
+  <div class="body" style="gap:7px">
+    <div style="border-radius:10px;overflow:hidden;border:1.5px solid #d0e4f0">
+      <div style="background:linear-gradient(90deg,#2B5BA8,#4A90C4);padding:8px 14px">
+        <span style="font-size:15px;font-weight:800;color:#fff">מודלים להתערבות בחירום</span>
       </div>
-      <div style="display:flex;flex-direction:column;gap:0">
-        <a class="toc-link" href="#tzalach"><div style="padding:6px 14px;font-size:14px;font-weight:600;border-bottom:1px solid #edf4f8;display:flex;justify-content:space-between;align-items:center"><span> צל"ח ועקרון הטווחים (לפני, בעת, ואחרי)</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">4</span></div></a>
-        <a class="toc-link" href="#circles"><div style="padding:6px 14px;font-size:14px;font-weight:600;border-bottom:1px solid #edf4f8;display:flex;justify-content:space-between;align-items:center"><span> מיפוי מעגלי פגיעות ותמיכה</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">5</span></div></a>
-        <a class="toc-link" href="#kamatz"><div style="padding:6px 14px;font-size:14px;font-weight:600;border-bottom:1px solid #edf4f8;display:flex;justify-content:space-between;align-items:center"><span> עקרון הקמ"צ</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">6</span></div></a>
-        <a class="toc-link" href="#maasha"><div style="padding:6px 14px;font-size:14px;font-weight:600;border-bottom:1px solid #edf4f8;display:flex;justify-content:space-between;align-items:center"><span> מודל מעש"ה</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">7</span></div></a>
-        <a class="toc-link" href="#aaa"><div style="padding:6px 14px;font-size:14px;font-weight:600;border-bottom:1px solid #edf4f8;display:flex;justify-content:space-between;align-items:center"><span> מודל א.א.א.</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">8</span></div></a>
-        <a class="toc-link" href="#gesher"><div style="padding:6px 14px;font-size:14px;font-weight:600;border-bottom:1px solid #edf4f8;display:flex;justify-content:space-between;align-items:center"><span> מודל גשר מאח"ד (מולי להד)</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">9</span></div></a>
-        <a class="toc-link" href="#dibub"><div style="padding:6px 14px;font-size:14px;font-weight:600;border-bottom:1px solid #edf4f8;display:flex;justify-content:space-between;align-items:center"><span> דיבוב פסיכולוגי</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">10</span></div></a>
-        <a class="toc-link" href="#ntt"><div style="padding:6px 14px;font-size:14px;font-weight:600;border-bottom:1px solid #edf4f8;display:flex;justify-content:space-between;align-items:center"><span> מודל נת"ת (נרמול, תיקוף, תקווה)</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">11</span></div></a>
-        <a class="toc-link" href="#continuity"><div style="padding:6px 14px;font-size:14px;font-weight:600;border-bottom:1px solid #edf4f8;display:flex;justify-content:space-between;align-items:center"><span> עקרון הרציפויות</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">12</span></div></a>
-        <a class="toc-link" href="#raztziput"><div style="padding:6px 14px;font-size:14px;font-weight:600;border-bottom:1px solid #edf4f8;display:flex;justify-content:space-between;align-items:center"><span> מודל רציפות בחרו"ם</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">13</span></div></a>
-        <a class="toc-link" href="#qmtz"><div style="padding:6px 14px;font-size:14px;font-weight:600;border-bottom:1px solid #edf4f8;display:flex;justify-content:space-between;align-items:center"><span> מודל קמץ</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">14</span></div></a>
-        <a class="toc-link" href="#mah-nishma"><div style="padding:6px 14px;font-size:14px;font-weight:600;border-bottom:1px solid #edf4f8;display:flex;justify-content:space-between;align-items:center"><span> סבב "מה נשמע"</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">15</span></div></a>
-        <a class="toc-link" href="#mmsh"><div style="padding:6px 14px;font-size:14px;font-weight:600;border-bottom:1px solid #edf4f8;display:flex;justify-content:space-between;align-items:center"><span> מודל ממ"ש</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">16</span></div></a>
-        <a class="toc-link" href="#wings"><div style="padding:6px 14px;font-size:14px;font-weight:600;border-bottom:1px solid #edf4f8;display:flex;justify-content:space-between;align-items:center"><span> כנפיים של תקווה</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">17</span></div></a>
-        <a class="toc-link" href="#gross"><div style="padding:6px 14px;font-size:14px;font-weight:600;display:flex;justify-content:space-between;align-items:center"><span> מודל 3 השלבים – גרוס ואלון</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">18</span></div></a>
+      <div style="display:flex;flex-direction:column">
+        <a class="toc-link" href="#tzalach" style="display:flex;justify-content:space-between;align-items:center;padding:7px 14px;border-bottom:1px solid #edf4f8;font-size:13px;font-weight:600;color:#1f2d3a;text-decoration:none"><span>צל"ח ועקרון הטווחים (לפני, בעת, ואחרי)</span><span style="color:#2B5BA8;font-size:12px;font-weight:700;flex-shrink:0;margin-right:8px">4</span></a>
+        <a class="toc-link" href="#maasha" style="display:flex;justify-content:space-between;align-items:center;padding:7px 14px;border-bottom:1px solid #edf4f8;font-size:13px;font-weight:600;color:#1f2d3a;text-decoration:none"><span>מודל מעש"ה</span><span style="color:#2B5BA8;font-size:12px;font-weight:700;flex-shrink:0;margin-right:8px">5</span></a>
+        <a class="toc-link" href="#aaa" style="display:flex;justify-content:space-between;align-items:center;padding:7px 14px;border-bottom:1px solid #edf4f8;font-size:13px;font-weight:600;color:#1f2d3a;text-decoration:none"><span>מודל א.א.א.</span><span style="color:#2B5BA8;font-size:12px;font-weight:700;flex-shrink:0;margin-right:8px">6</span></a>
+        <a class="toc-link" href="#gesher" style="display:flex;justify-content:space-between;align-items:center;padding:7px 14px;border-bottom:1px solid #edf4f8;font-size:13px;font-weight:600;color:#1f2d3a;text-decoration:none"><span>מודל גשר מאח"ד (מולי להד)</span><span style="color:#2B5BA8;font-size:12px;font-weight:700;flex-shrink:0;margin-right:8px">7</span></a>
+        <a class="toc-link" href="#dibub" style="display:flex;justify-content:space-between;align-items:center;padding:7px 14px;border-bottom:1px solid #edf4f8;font-size:13px;font-weight:600;color:#1f2d3a;text-decoration:none"><span>דיבוב פסיכולוגי</span><span style="color:#2B5BA8;font-size:12px;font-weight:700;flex-shrink:0;margin-right:8px">8</span></a>
+        <a class="toc-link" href="#ntt" style="display:flex;justify-content:space-between;align-items:center;padding:7px 14px;border-bottom:1px solid #edf4f8;font-size:13px;font-weight:600;color:#1f2d3a;text-decoration:none"><span>מודל נת"ת (נרמול, תיקוף, תקווה)</span><span style="color:#2B5BA8;font-size:12px;font-weight:700;flex-shrink:0;margin-right:8px">9</span></a>
+        <a class="toc-link" href="#continuity" style="display:flex;justify-content:space-between;align-items:center;padding:7px 14px;border-bottom:1px solid #edf4f8;font-size:13px;font-weight:600;color:#1f2d3a;text-decoration:none"><span>רציפות בחרו"ם</span><span style="color:#2B5BA8;font-size:12px;font-weight:700;flex-shrink:0;margin-right:8px">10</span></a>
+        <a class="toc-link" href="#kamatz" style="display:flex;justify-content:space-between;align-items:center;padding:7px 14px;border-bottom:1px solid #edf4f8;font-size:13px;font-weight:600;color:#1f2d3a;text-decoration:none"><span>עקרון הקמ"צ</span><span style="color:#2B5BA8;font-size:12px;font-weight:700;flex-shrink:0;margin-right:8px">11</span></a>
+        <a class="toc-link" href="#mah-nishma" style="display:flex;justify-content:space-between;align-items:center;padding:7px 14px;border-bottom:1px solid #edf4f8;font-size:13px;font-weight:600;color:#1f2d3a;text-decoration:none"><span>סבב "מה נשמע"</span><span style="color:#2B5BA8;font-size:12px;font-weight:700;flex-shrink:0;margin-right:8px">12</span></a>
+        <a class="toc-link" href="#mmsh" style="display:flex;justify-content:space-between;align-items:center;padding:7px 14px;border-bottom:1px solid #edf4f8;font-size:13px;font-weight:600;color:#1f2d3a;text-decoration:none"><span>מודל ממ"ש</span><span style="color:#2B5BA8;font-size:12px;font-weight:700;flex-shrink:0;margin-right:8px">13</span></a>
+                      </div>
+    </div>
+    <div style="border-radius:10px;overflow:hidden;border:1.5px solid #d0e4f0">
+      <div style="background:linear-gradient(90deg,#2B5BA8,#4A90C4);padding:8px 14px">
+        <span style="font-size:15px;font-weight:800;color:#fff">כלים מעשיים לעבודה עם ילדים בחירום</span>
+      </div>
+      <div style="display:flex;flex-direction:column">
+        <a class="toc-link" href="#p-breath-tools" style="display:flex;justify-content:space-between;align-items:center;padding:7px 14px;border-bottom:1px solid #edf4f8;font-size:13px;font-weight:600;color:#1f2d3a;text-decoration:none"><span>תרגילי נשימות</span><span style="color:#2B5BA8;font-size:12px;font-weight:700;flex-shrink:0;margin-right:8px">17</span></a>
+        <a class="toc-link" href="#p-kids-tools1" style="display:flex;justify-content:space-between;align-items:center;padding:7px 14px;border-bottom:1px solid #edf4f8;font-size:13px;font-weight:600;color:#1f2d3a;text-decoration:none"><span>כלים גופניים לקרקוע וויסות</span><span style="color:#2B5BA8;font-size:12px;font-weight:700;flex-shrink:0;margin-right:8px">18</span></a>
+        <a class="toc-link" href="#p-kids-tools2" style="display:flex;justify-content:space-between;align-items:center;padding:7px 14px;border-bottom:1px solid #edf4f8;font-size:13px;font-weight:600;color:#1f2d3a;text-decoration:none"><span>טכניקת הקרקוע 5-4-3-2-1</span><span style="color:#2B5BA8;font-size:12px;font-weight:700;flex-shrink:0;margin-right:8px">19</span></a>
+        <a class="toc-link" href="#p-jacobson-tools" style="display:flex;justify-content:space-between;align-items:center;padding:7px 14px;border-bottom:1px solid #edf4f8;font-size:13px;font-weight:600;color:#1f2d3a;text-decoration:none"><span>הרפיית שרירים הדרגתית (PMR) – ג׳ייקובסון</span><span style="color:#2B5BA8;font-size:12px;font-weight:700;flex-shrink:0;margin-right:8px">20</span></a>
+        <a class="toc-link" href="#p-5steps-tools" style="display:flex;justify-content:space-between;align-items:center;padding:7px 14px;border-bottom:1px solid #edf4f8;font-size:13px;font-weight:600;color:#1f2d3a;text-decoration:none"><span>5 שלבים לניהול הרגשות בזמן חירום</span><span style="color:#2B5BA8;font-size:12px;font-weight:700;flex-shrink:0;margin-right:8px">21</span></a>
+        <a class="toc-link" href="#p-anxiety-tools" style="display:flex;justify-content:space-between;align-items:center;padding:7px 14px;border-bottom:1px solid #edf4f8;font-size:13px;font-weight:600;color:#1f2d3a;text-decoration:none"><span>דימיון מודרך ומנטליזציה</span><span style="color:#2B5BA8;font-size:12px;font-weight:700;flex-shrink:0;margin-right:8px">22</span></a>
+        <a class="toc-link" href="#p-signs-tools" style="display:flex;justify-content:space-between;align-items:center;padding:7px 14px;border-bottom:1px solid #edf4f8;font-size:13px;font-weight:600;color:#1f2d3a;text-decoration:none"><span>סימנים אופייניים לתגובת לחץ</span><span style="color:#2B5BA8;font-size:12px;font-weight:700;flex-shrink:0;margin-right:8px">23</span></a>
+        <a class="toc-link" href="#p-phones-tools" style="display:flex;justify-content:space-between;align-items:center;padding:7px 14px;font-size:13px;font-weight:600;color:#1f2d3a;text-decoration:none"><span>טלפונים לשעת חירום</span><span style="color:#2B5BA8;font-size:12px;font-weight:700;flex-shrink:0;margin-right:8px">24</span></a>
       </div>
     </div>
-
-    <!-- כלים מעשיים -->
-    <div style="border-radius:12px;overflow:hidden;border:1.5px solid #d0e4f0">
-      <div style="background:linear-gradient(90deg,#2B5BA8,#4A90C4);padding:8px 14px;display:flex;align-items:center;gap:8px">
-        <span style="font-size:14px"></span>
-        <span style="font-size:15px;font-weight:800;color:#fff;letter-spacing:.3px">כלים מעשיים לעבודה עם ילדים בחירום</span>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:0">
-        <a class="toc-link" href="#p-breath-tools" style="display:flex;justify-content:space-between;align-items:center;padding:6px 14px;font-size:13px;font-weight:600;border-bottom:1px solid #edf4f8;color:inherit"><span>נשימות לילדים + חימום ידיים</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">20</span></a>
-        <a class="toc-link" href="#p-kids-tools1" style="display:flex;justify-content:space-between;align-items:center;padding:6px 14px;font-size:13px;font-weight:600;border-bottom:1px solid #edf4f8;color:inherit"><span>התערבות מיידית בחירום עם ילדים (1)</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">21</span></a>
-        <a class="toc-link" href="#p-kids-tools2" style="display:flex;justify-content:space-between;align-items:center;padding:6px 14px;font-size:13px;font-weight:600;border-bottom:1px solid #edf4f8;color:inherit"><span>התערבות מיידית בחירום עם ילדים (2)</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">22</span></a>
-        <a class="toc-link" href="#p-jacobson-tools" style="display:flex;justify-content:space-between;align-items:center;padding:6px 14px;font-size:13px;font-weight:600;border-bottom:1px solid #edf4f8;color:inherit"><span>הרפיית ג׳ייקובסון לילדים</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">23</span></a>
-        <a class="toc-link" href="#p-5steps-tools" style="display:flex;justify-content:space-between;align-items:center;padding:6px 14px;font-size:13px;font-weight:600;border-bottom:1px solid #edf4f8;color:inherit"><span>5 שלבים לניהול הרגשות בזמן חירום</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">24</span></a>
-        <a class="toc-link" href="#p-anxiety-tools" style="display:flex;justify-content:space-between;align-items:center;padding:6px 14px;font-size:13px;font-weight:600;border-bottom:1px solid #edf4f8;color:inherit"><span>כלים לטיפול ראשוני בנפגע חרדה</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">25</span></a>
-        <a class="toc-link" href="#p-signs-tools" style="display:flex;justify-content:space-between;align-items:center;padding:6px 14px;font-size:13px;font-weight:600;border-bottom:1px solid #edf4f8;color:inherit"><span>סימנים אופייניים לתגובת לחץ</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">26</span></a>
-        <a class="toc-link" href="#p-phones-tools" style="display:flex;justify-content:space-between;align-items:center;padding:6px 14px;font-size:13px;font-weight:600;color:inherit"><span>טלפונים לשעת חירום</span><span style="color:#2B5BA8;font-size:12px;font-weight:700">27</span></a>
-      </div>
-    </div>
-
   </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">2 / 27</div></div>
+  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">2 / 22</div></div>
 </div>
 
-
-<!-- ══ עקרון הקמ"צ ══ -->
-<!-- ══ מעבר – מודלים בשעת חירום ══ -->
 <div class="page">
   <div style="flex:1;display:flex;align-items:center;justify-content:center;background:linear-gradient(160deg,#1B3461,#2B5BA8)">
     <div style="text-align:center;padding:40px">
@@ -101,15 +277,17 @@
       <div style="font-size:17px;color:#fff;font-weight:500">מסגרות תיאורטיות ופרוטוקולים לפעולה</div>
     </div>
   </div>
-    <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">3 / 27</div></div>
+    <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">3 / 22</div></div>
 </div>
 
 
 <!-- ══ צל"ח ועקרון הטווחים ══ -->
 
 
+
+
 <div class="page" id="tzalach">
-  <div class="header"> צל"ח ועקרון הטווחים <span class="phase">צ התערבות מיידית</span></div>
+  <div class="header"> צל"ח ועקרון הטווחים <span class="phase">התערבות מיידית</span></div>
   <div class="body">
     <div class="bubble"><strong>צל"ח – צוות לשעת חירום.</strong> בנוי על המנהלים של האירוע. ההתערבות בחירום הינה מיידית וממוקדת ב"כאן ועכשיו" כדי להציל חיים, לאבחן כוחות וחולשות, לתת ידע וביטחון, לתת דרכי טיפול ולהחזיר את המערכת לתפקוד ושליטה.</div>
     <div class="sec">עקרון הטווחים: לפני, בעת ואחרי</div>
@@ -163,75 +341,11 @@
       </div>
     </div>
   </div>
-    <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">4 / 27</div></div>
-</div>
-
-<div class="page" id="circles">
-  <div class="header"> מיפוי מעגלי פגיעות ותמיכה <span class="phase">צ מיפוי וארגון מענה</span></div>
-  <div class="body">
-    <div class="txt"><p>מיפוי מעגלי פגיעות ותמיכה הוא כלי לתכנון מדיניות וטיפול המזהה אוכלוסיות שנפגעו באירוע (ישיר/עקיף) ואת המענים הנדרשים להן. המיפוי מסדר נפגעים ממעגל ראשון ועד רחוק, מאתר צרכים שלא נענו, ומסייע בבניית רשת תמיכה חברתית ורגשית מותאמת אישית. מטרות המיפוי: זיהוי פערים במענה הקהילתי, מניעת כפל מענים, ומתן קשב מותאם – במיוחד בעת חזרה לשגרת חירום.</p></div>
-    <div class="grid2" style="gap:10px">
-      <div style="display:flex;flex-direction:column;gap:7px">
-        <div class="sec-sm">מעגלי פגיעה</div>
-        <div class="card" style="border-right-color:#c0392b;background:#fdf5f5;font-size:14px;flex:1"><strong>מעגל ראשון – נפגעים ישירים:</strong> אנשים שחוו את האירוע באופן ישיר (נוכחים בפיגוע, מפונים, נפגעי מסיבות), וכן אלו עם גורמי סיכון קודמים.</div>
-        <div class="card" style="border-right-color:#e07030;background:#fef8f3;font-size:14px;flex:1"><strong>מעגל שני – נפגעים עקיפים:</strong> משפחות הנפגעים, חברים קרובים, וצוותים מקצועיים המטפלים בהם.</div>
-        <div class="card" style="border-right-color:#2D9B6F;background:#f0faf5;font-size:14px;flex:1"><strong>מעגל שלישי – קהילה:</strong> סביבה קהילתית רחבה יותר, מוסדות חינוך ושכנים החווים חרדה או השפעה עקיפה.</div>
-      </div>
-      <div style="display:flex;flex-direction:column;gap:7px">
-        <div class="sec-sm">מעגלי תמיכה</div>
-        <div class="card" style="font-size:14px;flex:1"><strong>תמיכה פנימית:</strong> צוות חינוכי קרוב (מחנך, יועצת), משפחה, חברים לכיתה.</div>
-        <div class="card" style="font-size:14px;flex:1"><strong>תמיכה חיצונית:</strong> שירותים פסיכולוגיים, רשויות מקומיות, עמותות ומוקדי סיוע.</div>
-        <div class="card" style="font-size:14px;flex:1"><strong>פעולות:</strong> איתור גורמים קרובים, הבניית קשרים מבוססי עידוד, וסדנאות העצמה.</div>
-      </div>
-    </div>
-    <div class="card" style="font-size:14px">
-      <strong>כיצד מבצעים את המיפוי?</strong>
-      <div style="display:flex;flex-direction:column;gap:5px;margin-top:8px">
-        <div style="color:#1f2d3a">1. מאכלסים אנשים וקבוצות על גבי תרשים המעגלים</div>
-        <div style="color:#1f2d3a">2. מזהים מי במעגל 1 ומחייב מענה מיידי</div>
-        <div style="color:#1f2d3a">3. מזהים במעגל 2-3 מי יכול לשמש משאב תמיכה</div>
-        <div style="color:#1f2d3a">4. מחלקים משאבי הצוות לפי סדר עדיפויות ומעדכנים באופן שוטף</div>
-      </div>
-    </div>
-    <div class="important" style="font-size:13px"><div class="imp-t">שימו לב</div>אנשי הטיפול עצמם עלולים להיות במעגל 2 – חשוב לאתר את מצבם ולדאוג לתמיכה גם בהם.</div>
-  </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">5 / 27</div></div>
-</div>
-
-<div class="page" id="kamatz">
-  <div class="header"> עקרון הקמ"צ <span class="phase">צ התערבות מיידית</span></div>
-  <div class="body">
-    <div class="txt"><p>עקרון הקמ"צ (קירבה, מיידיות, ציפייה) הוא מודל התערבות נפשית ראשונית בשעת חירום וטראומה, שמטרתו למנוע התפתחות פוסט-טראומה ולהחזיר לתפקוד. העקרון מבוסס על מתן סיוע בסמוך למקום האירוע, מיד לאחר התרחשותו, תוך גישה חיובית המצפה לחזרה מהירה לתפקוד. המודל (מולי להד, יהודה שחם ורובי רוגל) מוכר גם כ-PIE (Proximity, Immediacy, Expectancy) ומשמש אנשי מקצוע, צוותי חירום ומורים להתמודדות עם תגובות דחק חריפות (ASR).</p></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
-      <div style="background:linear-gradient(160deg,#1B3461,#2B5BA8);border-radius:14px;padding:20px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px">
-        <div style="font-size:36px;font-weight:900;color:#F0B429">ק</div>
-        <div style="font-size:16px;font-weight:800;color:#fff">קירבה</div>
-        <div style="font-size:13px;line-height:1.65;color:#fff;text-align:justify;text-align-last:right">ההתערבות צריכה להתבצע קרוב ככל האפשר למקום האירוע הפיזי. לא לנתק את הנפגע מסביבתו הטבעית. מטרה: למנוע ניתוק והעצמת החוויה הטראומטית.</div>
-      </div>
-      <div style="background:linear-gradient(160deg,#1B3461,#2B5BA8);border-radius:14px;padding:20px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px">
-        <div style="font-size:36px;font-weight:900;color:#F0B429">מ</div>
-        <div style="font-size:16px;font-weight:800;color:#fff">מיידיות</div>
-        <div style="font-size:13px;line-height:1.65;color:#fff;text-align:justify;text-align-last:right">מתן הסיוע הנפשי נעשה בסמיכות זמנים מיידית לטראומה. מטרה: למנוע את "דגירת" הטראומה והפיכתה לתגובה פוסט-טראומטית קבועה.</div>
-      </div>
-      <div style="background:linear-gradient(160deg,#1B3461,#2B5BA8);border-radius:14px;padding:20px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px">
-        <div style="font-size:36px;font-weight:900;color:#F0B429">צ</div>
-        <div style="font-size:16px;font-weight:800;color:#fff">ציפייה לחזרה לתפקוד</div>
-        <div style="font-size:13px;line-height:1.65;color:#fff;text-align:justify;text-align-last:right">גישה אופטימית ושידור ביטחון לנפגעים כי הם מסוגלים לחזור לתפקוד. תגובתם היא תגובה נורמלית למצב לא נורמלי. הימנעות מחיזוק תפקיד "נפגע".</div>
-      </div>
-    </div>
-    <div class="card">
-      <strong>כיצד מיישמים בפועל:</strong> לא מסיעים את האדם רחוק, לא מאשפזים אלא אם הכרחי, נותנים מענה קרוב לאירוע, מדברים בטון שמניח שהאדם יתאושש, ומחזירים לתפקוד.
-    </div>
-    <div class="important">
-      <div class="imp-t"> מתי הקמ"צ לא מספיק?</div>
-      כאשר התגובה חמורה ומתמשכת (מעל 4 שבועות), כאשר קיים פגיעה בתפקוד משמעותית, או כאשר יש גורמי סיכון מוקדמים – יש לפנות לטיפול פסיכולוגי ממוקד.
-    </div>
-  </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">6 / 27</div></div>
+    <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">4 / 22</div></div>
 </div>
 
 <div class="page" id="maasha">
-  <div class="header"> מודל מעש"ה – עזרה ראשונה נפשית במצבי דחק וחירום <span class="phase">צ התערבות מיידית</span></div>
+  <div class="header"> מודל מעש"ה – עזרה ראשונה נפשית במצבי דחק וחירום <span class="phase">התערבות מיידית</span></div>
   <div class="body">
     <div class="txt"><p>מודל לאומי פשוט וקצר (פותח ע"י משה פרחי) – איך להגיש עזרה ראשונה נפשית בזמן אירוע חירום. המודל עוזר להחזיר את האדם לתפקוד תוך דקה וחצי עד שתי דקות, ומאפשר לכל אחד להגיש עזרה ראשונה נפשית למי שנמצא סביבו ולהחזירו מיידית למצב תפקודי תקין.</p></div>
     <div style="display:flex;flex-direction:column;gap:8px">
@@ -254,11 +368,11 @@
     </div>
     <div class="card card-gold"><strong>מעש"ה – במחשבה תחילה:</strong> צור מחויבות ← עודד לפעולה ← שאל שאלות פשוטות ← הבניית האירוע</div>
   </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">7 / 27</div></div>
+  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">5 / 22</div></div>
 </div>
 
 <div class="page" id="aaa">
-  <div class="header"> מודל א.א.א. <span class="phase">צ התערבות מיידית</span></div>
+  <div class="header"> מודל א.א.א. <span class="phase">התערבות מיידית</span></div>
   <div class="body">
     <div class="txt"><p>מודל א.א.א. הוא פרוטוקול קצר ופרקטי לתגובה ראשונית בחירום. שלושת האותיות מייצגות שלושה שלבים עוקבים בהתערבות: מתן אינפורמציה ← אפשרות לאוורור ← ארגון מחדש.</p></div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
@@ -300,11 +414,11 @@
       <strong>עיקרון מנחה:</strong> המודל פועל לאורך שלוש שאלות מרכזיות: <strong>מה קרה?</strong> (אינפורמציה) ← <strong>מה אתה מרגיש?</strong> (אוורור) ← <strong>לאן ממשיכים?</strong> (ארגון מחדש). שלושתן יחד יוצרות מסלול מובנה של החלמה ראשונית.
     </div>
   </div>
-    <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">8 / 27</div></div>
+    <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">6 / 22</div></div>
 </div>
 
 <div class="page" id="gesher">
-  <div class="header"> מודל גשר מאח"ד <span class="phase">צ התערבות מיידית</span></div>
+  <div class="header"> מודל גשר מאח"ד <span class="phase">התערבות מיידית</span></div>
   <div class="body">
     <div class="txt"><p>מודל גשר מאח"ד (מולי להד) הוא מודל רב-ממדי להתמודדות עם מצבי לחץ ואי-ודאות. לכל אחד סגנון התמודדות שונה וייחודי לו בחירום. בכל אחד טמונה המסוגלות. המודל מזהה 7 ממדים דרכם אדם מגיב ויוצר קשר עם העולם. עיקרון ההצטרפות: "דומה בדומה ירפא".</p></div>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
@@ -318,11 +432,11 @@
     </div>
     <div class="important"><div class="imp-t">עקרון ההצטרפות</div>בהתערבות ננסה להבין מה הדפוס הכי יעיל עבור האדם הספציפי – ולחשוף אותו לכמה שיותר ערוצי התמודדות כדי להרחיב את הרפרטואר שלו. הכל נורמלי וטוב – אישי לכל אחד.</div>
   </div>
-    <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">9 / 27</div></div>
+    <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">7 / 22</div></div>
 </div>
 
 <div class="page" id="dibub">
-  <div class="header"> דיבוב פסיכולוגי <span class="phase">צ התערבות מיידית</span></div>
+  <div class="header"> דיבוב פסיכולוגי <span class="phase">התערבות מיידית</span></div>
   <div class="body">
     <div class="txt"><p>דיבוב פסיכולוגי (Psychological Debriefing) הוא כלי התערבות קבוצתית (או פרטנית) מובנית, הניתן מייד לאחר אירוע טראומטי ולפני הופעת הסימפטומים של פוסט-טראומה. מטרתו לאפשר עיבוד רגשי ראשוני, נרמול תגובות, מניעת בידוד ואשמה ומניעת פיתוח תחלואה נפשית כרונית עמוקה. דיבוב פסיכולוגי מתאים לכל מי שנחשף לאירוע טראומטי ולא רק למי שמפגין סימפטומים פסיכופתולוגיים או מצוקה כלשהי.</p></div>
     <div class="grid2">
@@ -348,11 +462,11 @@
       </div>
     </div>
   </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">10 / 27</div></div>
+  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">8 / 22</div></div>
 </div>
 
 <div class="page" id="ntt">
-  <div class="header"> מודל נת"ת <span class="phase">צ מיפוי וארגון מענה</span></div>
+  <div class="header"> מודל נת"ת <span class="phase">מיפוי וארגון מענה</span></div>
   <div class="body">
     <div class="txt"><p>מודל נת"ת מציע שלושה רכיבים מרכזיים שכל תגובה ראשונית בחירום צריכה לכלול: נרמול, תיקוף ותקווה. הוא מתאים לכל מגיב ראשון – לא רק אנשי מקצוע.</p></div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px">
@@ -395,99 +509,76 @@
     </div>
     <div class="card card-gold"> נת"ת הוא הבסיס לכל שיח תומך – לא רק בחירום. הוא כלי יעיל גם בשיחות יומיומיות עם ילדים ומבוגרים במצוקה.</div>
   </div>
-    <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">11 / 27</div></div>
+    <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">9 / 22</div></div>
 </div>
 
 <div class="page" id="continuity">
-  <div class="header"> עקרון הרציפויות <span class="phase">צ מיפוי וארגון מענה</span></div>
+  <div class="header"> רציפות בחרו"ם <span class="phase">מיפוי וארגון מענה</span></div>
   <div class="body">
-    <div class="txt"><p>עקרון הרציפויות קובע שאחד הגורמים המגינים ביותר על בני אדם בחירום הוא שמירה על רצף בתחומי חיים מרכזיים. שבירת הרצף מגבירה את הסיכון לתגובות קשות לאורך זמן. תפקיד המטפל הוא לאתר איפה הרצף נשבר ולסייע בשיקומו.</p></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-      <div class="card"><strong> רציפות לימודית</strong><br>חזרה לשגרת לימודים בהקדם האפשרי, אפילו בצורה מותאמת. הלמידה מספקת מבנה, תחושת נורמליות ושגרה.</div>
-      <div class="card"><strong> רציפות חברתית</strong><br>שמירה על קשרים חברתיים, חברים, קבוצת גיל. הבידוד מגביר פגיעות.</div>
-      <div class="card"><strong> רציפות מרחבית</strong><br>כמה שאפשר – לא להוציא ילדים ואנשים מסביבתם הרגילה. ההרחקה הכרחית לפעמים, אך יש לה מחיר.</div>
-      <div class="card"><strong>‍‍ רציפות בין-אישית</strong><br>שמירה על קשר עם מבוגרים מוכרים – מורים, הורים, דמויות מטפלות קבועות. להמנע מחילופי צוות תכופים.</div>
-      <div class="card"><strong> רציפות תפקודית</strong><br>לחזור לפעילות ולתפקוד בהקדם – עבודה, שגרה יומית, אחריות. התפקוד מגביר את תחושת השליטה.</div>
-      <div class="card"><strong> רציפות נרטיבית</strong><br>עזרה לאנשים לשמור על "סיפור חיים" עקבי – לא לתת לאירוע לשבור את הזהות והמשמעות.</div>
+    <div class="txt"><p>מודל "רציפות בחרו"ם" (משה אלון ודורית גרוס) מבוסס על גישת הרצפים (עומר ואלון, 1994): אירוע חירום שובר את רצף הקיום. ההתערבות צריכה לפעול לאורך שלוש רמות – חשיבה, רגש ומעשה – כדי לשקם את הרצפים שנקטעו.</p></div>
+    <div class="sec-sm">4 הרצפים הנקטעים בחירום</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px">
+      <div class="card" style="font-size:14px"><strong>רציפות קוגניטיבית-תודעתית</strong><br>עד כמה הילד מבין מה קרה. ההתערבות: השלמת מידע, יצירת סדר כרונולוגי – לפני, במהלך ואחרי.</div>
+      <div class="card" style="font-size:14px"><strong>רציפות הזהות</strong><br>חיבור מחדש למי אני. ההתערבות: אישור שהתגובה נורמלית ואני עדיין אני. מה מקומי במשפחה? האם מותר לי לשמוח?</div>
+      <div class="card" style="font-size:14px"><strong>רציפות חברתית בין-אישית</strong><br>מניעת בדידות. ההתערבות: לחבר לאחרים, לשמור שהילד עדיין בקשר עם חברים ומבוגרים בחייו.</div>
+      <div class="card" style="font-size:14px"><strong>רציפות תפקודית</strong><br>בחירום לא יודעים מה מצופה. ההתערבות: לארגן תפקיד ולו הקטן ביותר, ולחזור לשגרה בסביבה הרגילה.</div>
     </div>
-    <div class="important"><div class="imp-t">עיקרון מנחה</div>שאל לא רק "מה רע?" אלא גם "מה עדיין תקין?" – הגנה על הרציפות שנשארה חשובה לא פחות מטיפול בנזק שנגרם.</div>
+    <div class="sec-sm">3 רמות ההתערבות – חרו"ם</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px">
+      <div style="background:#EBF2FA;border-radius:12px;padding:13px;border-top:4px solid #2B5BA8;display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:14px;font-weight:800;color:#1B3461;text-align:center">ח – חשיבה (Knowing)</div>
+        <div style="font-size:13px;line-height:1.65;color:#1f2d3a">◆ מתן מידע ברור על האירוע<br>◆ הסברת תגובות נורמטיביות<br>◆ מסגרת קוגניטיבית<br>◆ הפחתת בלבול ואי-ודאות</div>
+      </div>
+      <div style="background:#EBF2FA;border-radius:12px;padding:13px;border-top:4px solid #2B5BA8;display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:14px;font-weight:800;color:#1B3461;text-align:center">ר – רגש (Being)</div>
+        <div style="font-size:13px;line-height:1.65;color:#1f2d3a">◆ מרחב לביטוי רגשי<br>◆ אמפתיה ונוכחות<br>◆ נרמול רגשות קשים<br>◆ הכלה בלי לפתור מיד</div>
+      </div>
+      <div style="background:#EBF2FA;border-radius:12px;padding:13px;border-top:4px solid #F0B429;display:flex;flex-direction:column;gap:6px">
+        <div style="font-size:14px;font-weight:800;color:#1B3461;text-align:center">מ – מעשה (Doing)</div>
+        <div style="font-size:13px;line-height:1.65;color:#1f2d3a">◆ עידוד לפעולה ותפקוד<br>◆ חזרה לשגרה בהדרגה<br>◆ מתן משימות ותפקידים<br>◆ בניית תוכנית פעולה</div>
+      </div>
+    </div>
   </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">12 / 27</div></div>
+  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">10 / 22</div></div>
 </div>
 
-<div class="page" id="raztziput">
-  <div class="header"> מודל רציפות בחרו"ם <span class="phase">צ מיפוי וארגון מענה</span></div>
+
+<div class="page" id="kamatz">
+  <div class="header"> עקרון הקמ"צ <span class="phase">התערבות מיידית</span></div>
   <div class="body">
-    <div class="txt"><p>מודל "רציפות בחרו"ם" פותח על ידי משה אלון ודורית גרוס, ומיועד לפסיכולוג החינוכי המתערב בשעת חירום. השם חרו"ם הוא ראשי תיבות: <strong>ח</strong>שיבה, <strong>ר</strong>גש, <strong>ו</strong>מעשה. המודל מתייחס לשלוש רמות של התערבות, ומדגיש את חשיבות הרציפות לחיים בריאים.</p></div>
+    <div class="txt"><p>עקרון הקמ"צ (קירבה, מיידיות, ציפייה) הוא מודל התערבות נפשית ראשונית בשעת חירום וטראומה, שמטרתו למנוע התפתחות פוסט-טראומה ולהחזיר לתפקוד. העקרון מבוסס על מתן סיוע בסמוך למקום האירוע, מיד לאחר התרחשותו, תוך גישה חיובית המצפה לחזרה מהירה לתפקוד. המודל (מולי להד, יהודה שחם ורובי רוגל) מוכר גם כ-PIE (Proximity, Immediacy, Expectancy) ומשמש אנשי מקצוע, צוותי חירום ומורים להתמודדות עם תגובות דחק חריפות (ASR).</p></div>
     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
-      <div style="background:#EBF2FA;border-radius:14px;padding:16px;border-top:4px solid #2B5BA8;display:flex;flex-direction:column;gap:8px">
-        <div style="font-size:28px;text-align:center"></div>
-        <div style="font-size:15px;font-weight:800;color:#1B3461;text-align:center">ח – חשיבה (Knowing)</div>
-        <div style="font-size:13.5px;line-height:1.7;color:#1f2d3a">
-          ◆ מתן מידע ברור על האירוע<br>
-          ◆ הסברת תגובות נורמטיביות<br>
-          ◆ מתן מסגרת קוגניטיבית להבנת המצב<br>
-          ◆ הפחתת בלבול ואי-ודאות
-        </div>
+      <div style="background:linear-gradient(160deg,#1B3461,#2B5BA8);border-radius:14px;padding:20px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px">
+        <div style="font-size:36px;font-weight:900;color:#F0B429">ק</div>
+        <div style="font-size:16px;font-weight:800;color:#fff">קירבה</div>
+        <div style="font-size:13px;line-height:1.65;color:#fff;text-align:justify;text-align-last:right">ההתערבות צריכה להתבצע קרוב ככל האפשר למקום האירוע הפיזי. לא לנתק את הנפגע מסביבתו הטבעית. מטרה: למנוע ניתוק והעצמת החוויה הטראומטית.</div>
       </div>
-      <div style="background:#EBF2FA;border-radius:14px;padding:16px;border-top:4px solid #2B5BA8;display:flex;flex-direction:column;gap:8px">
-        <div style="font-size:28px;text-align:center"></div>
-        <div style="font-size:15px;font-weight:800;color:#1B3461;text-align:center">ר – רגש (Being)</div>
-        <div style="font-size:13.5px;line-height:1.7;color:#1f2d3a">
-          ◆ מתן מרחב לביטוי רגשי<br>
-          ◆ אמפתיה ונוכחות<br>
-          ◆ נרמול רגשות קשים<br>
-          ◆ הכלה בלי לפתור ולסדר מיד
-        </div>
+      <div style="background:linear-gradient(160deg,#1B3461,#2B5BA8);border-radius:14px;padding:20px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px">
+        <div style="font-size:36px;font-weight:900;color:#F0B429">מ</div>
+        <div style="font-size:16px;font-weight:800;color:#fff">מיידיות</div>
+        <div style="font-size:13px;line-height:1.65;color:#fff;text-align:justify;text-align-last:right">מתן הסיוע הנפשי נעשה בסמיכות זמנים מיידית לטראומה. מטרה: למנוע את "דגירת" הטראומה והפיכתה לתגובה פוסט-טראומטית קבועה.</div>
       </div>
-      <div style="background:#EBF2FA;border-radius:14px;padding:16px;border-top:4px solid #F0B429;display:flex;flex-direction:column;gap:8px">
-        <div style="font-size:28px;text-align:center"></div>
-        <div style="font-size:15px;font-weight:800;color:#1B3461;text-align:center">מ – מעשה (Doing)</div>
-        <div style="font-size:13.5px;line-height:1.7;color:#1f2d3a">
-          ◆ עידוד לפעולה ותפקוד<br>
-          ◆ חזרה לשגרה בהדרגה<br>
-          ◆ מתן משימות ותפקידים<br>
-          ◆ בניית תוכנית פעולה
-        </div>
+      <div style="background:linear-gradient(160deg,#1B3461,#2B5BA8);border-radius:14px;padding:20px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px">
+        <div style="font-size:36px;font-weight:900;color:#F0B429">צ</div>
+        <div style="font-size:16px;font-weight:800;color:#fff">ציפייה לחזרה לתפקוד</div>
+        <div style="font-size:13px;line-height:1.65;color:#fff;text-align:justify;text-align-last:right">גישה אופטימית ושידור ביטחון לנפגעים כי הם מסוגלים לחזור לתפקוד. תגובתם היא תגובה נורמלית למצב לא נורמלי. הימנעות מחיזוק תפקיד "נפגע".</div>
       </div>
     </div>
-    <div class="grid2" style="gap:10px">
-      <div class="card"><strong>השלב הקריטי:</strong> המטפל צריך להתנועע בגמישות בין שלוש הרמות – לא לתקוע רק ב"מידע" או רק ב"רגש". רמת ה"מעשה" היא היעד הסופי.</div>
-      <div class="important"><div class="imp-t">הרציפות כעיקרון מנחה</div>המודל מבוסס על כך שרציפות הקיום – בחשיבה, ברגש ובמעשה – היא הבסיס לחיים בריאים. החירום שובר את הרציפות, וההתערבות מנסה לשקם אותה.</div>
+    <div class="card">
+      <strong>כיצד מיישמים בפועל:</strong> לא מסיעים את האדם רחוק, לא מאשפזים אלא אם הכרחי, נותנים מענה קרוב לאירוע, מדברים בטון שמניח שהאדם יתאושש, ומחזירים לתפקוד.
+    </div>
+    <div class="important">
+      <div class="imp-t"> מתי הקמ"צ לא מספיק?</div>
+      כאשר התגובה חמורה ומתמשכת (מעל 4 שבועות), כאשר קיים פגיעה בתפקוד משמעותית, או כאשר יש גורמי סיכון מוקדמים – יש לפנות לטיפול פסיכולוגי ממוקד.
     </div>
   </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">13 / 27</div></div>
+  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">11 / 22</div></div>
 </div>
 
-<div class="page" id="qmtz">
-  <div class="header"> מודל קמץ <span class="phase">צ התערבות קהילתית</span></div>
-  <div class="body">
-    <div class="txt"><p>מודל קמץ הוא כלי לניהול ותעדוף המענה הקהילתי-מערכתי בחירום. הוא מספק מסגרת ארגונית לחשיבה על מי עושה מה ובאיזה סדר. שמו הוא ראשי תיבות של ארבעת מרכיביו המרכזיים.</p></div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div style="display:flex;align-items:flex-start;gap:12px">
-        <div class="letter-box">ק</div>
-        <div class="card" style="flex:1"><strong>קביעת עדיפויות</strong> – מי הנפגעים הקשים ביותר? אילו צרכים דחופים ואילו יכולים לחכות? מיפוי ראשוני מהיר של "מה בוער" ומה אפשר לדחות שעות או ימים.</div>
-      </div>
-      <div style="display:flex;align-items:flex-start;gap:12px">
-        <div class="letter-box">מ</div>
-        <div class="card" style="flex:1"><strong>מענה מיידי</strong> – ארגון הפעולות המיידיות הדחופות. מי עושה מה? כיצד מתחלקים המשאבים? כולל גיוס מתנדבים, צוותים, ותיאום גורמים.</div>
-      </div>
-      <div style="display:flex;align-items:flex-start;gap:12px">
-        <div class="letter-box">צ</div>
-        <div class="card" style="flex:1"><strong>צרכים לטווח קצר-בינוני</strong> – מה יידרש בימים ובשבועות הקרובים? מיפוי צרכים שיגיחו לאחר שהאדרנלין שוכך – דיור, תמיכה נפשית, סיוע כלכלי, חזרה לשגרה.</div>
-      </div>
-      <div style="display:flex;align-items:flex-start;gap:12px">
-        <div class="letter-box" style="background:linear-gradient(135deg,#F0B429,#c8900a)">ת</div>
-        <div class="card" style="flex:1"><strong>תיאום בין גורמים</strong> – מי מתאם בין כל הגורמים המעורבים? כיצד נמנעים מכפילויות ומחסמים? מינוי אחראי תיאום ברור.</div>
-      </div>
-    </div>
-    <div class="important"><div class="imp-t">מתאים במיוחד ל:</div>מנהלי בתי ספר, ראשי צוותים בשפ"ח, מנהלי מחלקות רווחה – כל מי שצריך לקבל החלטות ניהוליות מהירות בכאוס של חירום.</div>
-  </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">14 / 27</div></div>
-</div>
+
 
 <div class="page" id="mah-nishma">
-  <div class="header"> סבב "מה נשמע" <span class="phase">צ התערבות קהילתית</span></div>
+  <div class="header"> סבב "מה נשמע" <span class="phase">התערבות קהילתית</span></div>
   <div class="body">
     <div class="txt"><p>סבב "מה נשמע" הוא כלי להתערבות פרואקטיבית בחירום – יוצרים קשר עם תושבים/הורים/תלמידים לפני שהם פונים, כדי לאתר צרכים, לנרמל ולתמוך. הוא מבוסס על הרעיון שאנשים רבים אינם פונים לעזרה מעצמם.</p></div>
     <div class="grid2">
@@ -516,153 +607,54 @@
       </div>
     </div>
   </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">15 / 27</div></div>
+  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">12 / 22</div></div>
 </div>
 
 <div class="page" id="mmsh">
-  <div class="header"> מודל ממ"ש <span class="phase">צ שיקום וחזרה לשגרה</span></div>
+  <div class="header"> מודל ממ"ש <span class="phase">שיקום וחזרה לשגרה</span></div>
   <div class="body">
-    <div class="txt"><p>מודל ממ"ש פותח על ידי דורון היימן (2020) ומיועד לפסיכולוג החינוכי המתערב במשבר. הוא מציע מסגרת לניהול ההתערבות לאורך ציר הזמן – מהמוכנות מראש, דרך המענה המיידי, ועד לשיקום ארוך הטווח. כל שלב מחייב עבודה שונה ומשקל שונה.</p></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+    <div class="txt"><p>מודל ממ"ש (מוכנות, מענה, שיקום והתאוששות) הוא מודל מארגן לעבודת פסיכולוגים חינוכיים ואנשי חינוך בניהול התערבות במשברים, במיוחד בשגרה מתמשכת של הסלמות ביטחוניות. המודל מסייע ביצירת רצף טיפולי המשלב הכנה מוקדמת, תגובה בזמן אמת, ושיקום מערכות ופרטים, תוך שימת דגש על חוסן (היימן, 2020).</p></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
       <div style="background:linear-gradient(160deg,#1B3461,#2B5BA8);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px">
         <div style="font-size:24px;font-weight:900;color:#F0B429">מ – מוכנות</div>
-        <div style="font-size:13px;line-height:1.7;color:rgba(255,255,255,.9)">
+        <div style="font-size:13px;line-height:1.7;color:#fff">
           <strong style="color:#F0B429">לפני האירוע</strong><br>
+          בניית תשתית נפשית, ארגונית וקהילתית לפני התרחשות המשבר:<br><br>
           ◆ גיבוש תוכנית חירום מוסדית<br>
           ◆ הכשרת צוותים לתגובה ראשונית<br>
           ◆ מיפוי אוכלוסיות בסיכון<br>
-          ◆ בניית רשתות תמיכה מראש<br>
-          ◆ תרגולים ולמידה מאירועים קודמים
+          ◆ תרגולים והערכת סיכונים
         </div>
       </div>
       <div style="background:linear-gradient(160deg,#1B3461,#2B5BA8);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px">
         <div style="font-size:24px;font-weight:900;color:#F0B429">מ – מענה</div>
-        <div style="font-size:13px;line-height:1.7;color:rgba(255,255,255,.9)">
+        <div style="font-size:13px;line-height:1.7;color:#fff">
           <strong style="color:#F0B429">בזמן האירוע ומיד אחריו</strong><br>
-          ◆ עזרה ראשונה נפשית מיידית<br>
+          התערבות בזמן אמת:<br><br>
+          ◆ תמיכה ראשונית והרגעה<br>
+          ◆ הפחתת מצוקה<br>
           ◆ תמיכה בצוות ובמנהלים<br>
-          ◆ תקשורת עם הורים וקהילה<br>
-          ◆ ניהול המשבר החינוכי<br>
-          ◆ "כל הפסיכולוג" ממוקד כאן
+          ◆ תקשורת עם הורים וקהילה
         </div>
       </div>
       <div style="background:linear-gradient(160deg,#1B3461,#2B5BA8);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px">
-        <div style="font-size:24px;font-weight:900;color:#F0B429">ש – שיקום</div>
-        <div style="font-size:13px;line-height:1.7;color:rgba(255,255,255,.9)">
-          <strong style="color:#F0B429">שבועות–חודשים לאחר האירוע</strong><br>
-          ◆ חזרה הדרגתית לשגרה<br>
+        <div style="font-size:24px;font-weight:900;color:#F0B429">ש – שיקום והתאוששות</div>
+        <div style="font-size:13px;line-height:1.7;color:#fff">
+          <strong style="color:#F0B429">לאחר האירוע – לטווח קצר וארוך</strong><br><br>
+          ◆ החזרת תפקוד<br>
+          ◆ עיבוד החוויה<br>
+          ◆ מניעת פוסט-טראומה ארוכת טווח<br>
           ◆ מעקב אחר נפגעים<br>
-          ◆ טיפול בלחץ משני של צוות<br>
-          ◆ בניית חוסן מחדש<br>
-          ◆ תיעוד ולמידה
-        </div>
-      </div>
-      <div style="background:linear-gradient(160deg,#1B3461,#2B5BA8);border-radius:14px;padding:16px;display:flex;flex-direction:column;gap:8px">
-        <div style="font-size:24px;font-weight:900;color:#F0B429">ש – השתאוששות</div>
-        <div style="font-size:13px;line-height:1.7;color:rgba(255,255,255,.9)">
-          <strong style="color:#F0B429">לטווח ארוך</strong><br>
-          ◆ עיבוד הזיכרון הקהילתי<br>
           ◆ חיזוק גורמי חוסן לעתיד<br>
-          ◆ שילוב האירוע בזהות הקהילתית<br>
-          ◆ היערכות לאירוע הבא<br>
-          ◆ מחקר ופיתוח מקצועי
+          ◆ הפקת לקחים ומחקר
         </div>
       </div>
     </div>
   </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">16 / 27</div></div>
+  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">13 / 22</div></div>
 </div>
 
-<div class="page" id="wings">
-  <div class="header"> כנפיים של תקווה <span class="phase">צ שיקום וחזרה לשגרה</span></div>
-  <div class="body">
-    <div class="txt"><p>מודל "כנפיים של תקווה" (קלמן הלוי ומסרמן אזולאי, 2020) מיועד לפסיכולוגים המלווים צוותי חינוך בחירום מתמשך. שם המודל מבטא שתי תנועות הכרחיות – פנימה והחוצה – כדי לשמר תפקוד ומשמעות.</p></div>
-    <div class="grid2">
-      <div style="background:#EBF2FA;border-radius:14px;padding:18px 16px;border-top:4px solid #2B5BA8">
-        <div style="font-size:22px;margin-bottom:8px"></div>
-        <div style="font-size:15px;font-weight:800;color:#1B3461;margin-bottom:8px">כנף 1 – תנועה פנימה</div>
-        <div style="font-size:14px;line-height:1.75;color:#1f2d3a">
-          חיבור לעולם הפנימי של הפרט:<br>
-          ◆ זיהוי רגשות ומחשבות קשים<br>
-          ◆ הכרה בסדקים ובמצוקה<br>
-          ◆ עיבוד פנימי ומשמעות<br>
-          ◆ תמיכה בויסות עצמי<br>
-          ◆ מניעת שחיקה ולחץ משני
-        </div>
-      </div>
-      <div style="background:#EBF2FA;border-radius:14px;padding:18px 16px;border-top:4px solid #F0B429">
-        <div style="font-size:22px;margin-bottom:8px"></div>
-        <div style="font-size:15px;font-weight:800;color:#1B3461;margin-bottom:8px">כנף 2 – תנועה החוצה</div>
-        <div style="font-size:14px;line-height:1.75;color:#1f2d3a">
-          פנייה אל העולם החיצוני:<br>
-          ◆ פעולה ותפקוד<br>
-          ◆ חיבור לאחרים ולתפקיד<br>
-          ◆ מתן מענה לתלמידים<br>
-          ◆ שמירה על נוכחות מקצועית<br>
-          ◆ ייצוג יציבות עבור הסביבה
-        </div>
-      </div>
-    </div>
-    <div class="card" style="margin-top:2px">
-      <strong>ה"כנפיים"</strong> – התנועה הגמישה בין פנימה לחוצה ובחזרה היא שיוצרת את "הכנפיים" ומאפשרת לאנשי חינוך להתמיד בתפקידם ללא שחיקה. הקפיאה בצד אחד (רק לפנים = הצפה / רק לחוץ = ניתוק) פוגעת בתפקוד.
-    </div>
-    <div class="card card-gold">
-      <strong> ייחוד המודל:</strong> הוא פותח ספציפית עבור אנשי הצוות – לא עבור תלמידים. הוא מכיר בכך שמורים ופסיכולוגים גם הם נמצאים בחרום, ולא רק "מטפלים בו מבחוץ".
-    </div>
-    <div class="important"><div class="imp-t">המלצה ליישום</div>שימוש בתצפית מודרכת, בשיחות צוות, ובסדנאות "עיבוד לחץ משני" – כדי לבחון באיזו כנף הצוות תקוע ולאפשר תנועה.</div>
-  </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">17 / 27</div></div>
-</div>
 
-<div class="page" id="gross">
-  <div class="header"> מודל 3 השלבים – גרוס ואלון <span class="phase">צ שיקום וחזרה לשגרה</span></div>
-  <div class="body">
-    <div class="txt"><p>מודל זה פותח על ידי דורית גרוס ומשה אלון (2003) ומתייחס לתפקיד הפסיכולוג החינוכי בחירום על פני ציר הזמן. הוא מחלק את ההתערבות לשלושה שלבים מרכזיים ומגדיר לכל שלב משימות ברורות.</p></div>
-    <div style="display:flex;flex-direction:column;gap:10px">
-      <div style="display:flex;align-items:flex-start;gap:14px">
-        <div style="background:#EBF2FA;border:2px solid #2B5BA8;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#1B3461;flex-shrink:0">1</div>
-        <div style="flex:1">
-          <div style="font-size:15px;font-weight:800;color:#1B3461;margin-bottom:6px">שלב ההכנה – לפני האירוע</div>
-          <div class="card" style="font-size:14px">
-            ◆ גיבוש פרוטוקולי חירום מוסדיים עם הנהלת בית הספר<br>
-            ◆ הכשרת אנשי צוות לתגובה ראשונית<br>
-            ◆ מיפוי מקורות סיכון ואוכלוסיות פגיעות<br>
-            ◆ בניית קשרים עם גורמים חיצוניים (עו"ס, פסיכיאטריה, מד"א)<br>
-            ◆ תרגולים ותכנון תרחישים
-          </div>
-        </div>
-      </div>
-      <div style="display:flex;align-items:flex-start;gap:14px">
-        <div style="background:#2B5BA8;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#fff;flex-shrink:0">2</div>
-        <div style="flex:1">
-          <div style="font-size:15px;font-weight:800;color:#1B3461;margin-bottom:6px">שלב ההתערבות – בעת האסון</div>
-          <div class="card" style="font-size:14px">
-            ◆ עבודה מערכתית – זיהוי מעגלי הפגיעה וארגון ההתערבות<br>
-            ◆ הדרכה ותמיכה בצוות בית הספר<br>
-            ◆ תמיכה בהנהלה לקבלת החלטות תחת לחץ<br>
-            ◆ מענה ישיר לילדים ולהורים הפגועים קשה<br>
-            ◆ תיאום עם גורמים חיצוניים
-          </div>
-        </div>
-      </div>
-      <div style="display:flex;align-items:flex-start;gap:14px">
-        <div style="background:linear-gradient(135deg,#F0B429,#c8900a);border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;color:#fff;flex-shrink:0">3</div>
-        <div style="flex:1">
-          <div style="font-size:15px;font-weight:800;color:#1B3461;margin-bottom:6px">שלב השיקום – לאחר האסון</div>
-          <div class="card" style="font-size:14px">
-            ◆ מעקב אחר ילדים ומשפחות בסיכון לאורך זמן<br>
-            ◆ תמיכה בצוות ועיבוד לחץ משני<br>
-            ◆ חזרה מדודה לשגרה תוך שמירה על רצף<br>
-            ◆ הפנייה לטיפול ממוקד של מי שמתמידה מצוקתם<br>
-            ◆ תיעוד, הפקת לקחים ועדכון פרוטוקולים
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="card card-gold"> <strong>תרומה ייחודית:</strong> המודל הדגיש לראשונה שהפסיכולוג החינוכי בחירום עובד בעיקר ברמה מערכתית – לא רק אחד-על-אחד. תפקידו לארגן ולהכשיר אחרים, לא רק לטפל בעצמו.</div>
-  </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">18 / 27</div></div>
-</div>
 
 
 
@@ -676,102 +668,123 @@
       <div style="font-size:17px;color:#fff;font-weight:500">טכניקות קרקוע, נשימה, הרפיה<br>ועזרה ראשונה נפשית</div>
     </div>
   </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">19 / 27</div></div>
+  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">14 / 22</div></div>
 </div>
 
 
 <!-- ══ נשימות לילדים ══ -->
 <div class="page" id="p-breath-tools">
-  <div class="header">🌬️ נשימות לילדים <span class="phase">צ כלים מעשיים</span></div>
+  <div class="header">🌬️ תרגילי נשימות <span class="phase">כלים מעשיים</span></div>
   <div class="body">
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
-      <div style="background:#EBF2FA;border-radius:14px;padding:16px;text-align:center;border-top:4px solid #2B5BA8;display:flex;flex-direction:column;align-items:center;gap:8px">
-        <div style="font-size:34px">🌸</div>
-        <div style="font-size:14px;font-weight:800;color:#1B3461">נשימות עומק (1)</div>
-        <div style="font-size:13px;line-height:1.65;color:#1f2d3a;text-align:right">להריח פרח, לכבות הרבה נרות.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px">
+      <div style="background:#EBF2FA;border-radius:14px;padding:14px;text-align:center;border-top:4px solid #2B5BA8;display:flex;flex-direction:column;align-items:center;gap:7px">
+        <div style="font-size:32px">🌸</div>
+        <div style="font-size:14px;font-weight:800;color:#1B3461">להריח פרח, לכבות נר</div>
+        <div style="font-size:13px;line-height:1.6;color:#1f2d3a;text-align:right">לשאוף לאט דרך האף כאילו מריחים פרח. לנשוף לאט דרך הפה כאילו מכבים נר. לחזור 5 פעמים.</div>
       </div>
-      <div style="background:#EBF2FA;border-radius:14px;padding:16px;text-align:center;border-top:4px solid #2B5BA8;display:flex;flex-direction:column;align-items:center;gap:8px">
-        <div style="font-size:34px">🎈</div>
-        <div style="font-size:14px;font-weight:800;color:#1B3461">נשימות עומק (2) – בלון</div>
-        <div style="font-size:13px;line-height:1.65;color:#1f2d3a;text-align:right">להניח ידיים על הבטן. לקחת נשימה עמוקה דרך האף – הבטן מתמלאת כמו בלון נפוח. לשחרר לאט דרך הפה.</div>
+      <div style="background:#EBF2FA;border-radius:14px;padding:14px;text-align:center;border-top:4px solid #2B5BA8;display:flex;flex-direction:column;align-items:center;gap:7px">
+        <div style="font-size:32px">🎈</div>
+        <div style="font-size:14px;font-weight:800;color:#1B3461">נשימת בלון</div>
+        <div style="font-size:13px;line-height:1.6;color:#1f2d3a;text-align:right">להניח ידיים על הבטן. לשאוף עמוק דרך האף – הבטן מתמלאת כמו בלון. לנשוף לאט דרך הפה ולהרגיש הבטן יורדת.</div>
       </div>
-      <div style="background:#EBF2FA;border-radius:14px;padding:16px;text-align:center;border-top:4px solid #F0B429;display:flex;flex-direction:column;align-items:center;gap:8px">
-        <div style="font-size:34px">🔺</div>
-        <div style="font-size:14px;font-weight:800;color:#1B3461">נשימות עומק (3) – מתקדם</div>
-        <div style="font-size:13px;line-height:1.65;color:#1f2d3a;text-align:right">יד על בית החזה, יד על הבטן. לשאוף דרך האף, לנשוף דרך הפה.</div>
+      <div style="background:#EBF2FA;border-radius:14px;padding:14px;text-align:center;border-top:4px solid #F0B429;display:flex;flex-direction:column;align-items:center;gap:7px">
+        <div style="font-size:32px">🔺</div>
+        <div style="font-size:14px;font-weight:800;color:#1B3461">נשימה מתקדמת</div>
+        <div style="font-size:13px;line-height:1.6;color:#1f2d3a;text-align:right">יד על בית החזה, יד על הבטן. לשאוף דרך האף. לנשוף בזמזום <strong>SSSS</strong>, לנשוף ב-<strong>המםםם</strong>.</div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px">
+      <div style="background:#EBF2FA;border-radius:14px;padding:14px;text-align:center;border-top:4px solid #2B5BA8;display:flex;flex-direction:column;align-items:center;gap:7px">
+        <div style="font-size:32px">🐟</div>
+        <div style="font-size:14px;font-weight:800;color:#1B3461">תנועות דג</div>
+        <div style="font-size:13px;line-height:1.6;color:#1f2d3a;text-align:right">לפתוח ולסגור את הפה לסירוגין, כמו דג. לבצע כשיש מתח בלסת. לחזור עד שהלסת מרגישה רפויה.</div>
+      </div>
+      <div style="background:#EBF2FA;border-radius:14px;padding:14px;text-align:center;border-top:4px solid #2B5BA8;display:flex;flex-direction:column;align-items:center;gap:7px">
+        <div style="font-size:32px">🫧</div>
+        <div style="font-size:14px;font-weight:800;color:#1B3461">בועות סבון</div>
+        <div style="font-size:13px;line-height:1.6;color:#1f2d3a;text-align:right">להפריח בועות סבון – הנשיפה האיטית שנדרשת מסדירה אוטומטית את הנשימה ומרגיעה.</div>
+      </div>
+      <div style="background:#EBF2FA;border-radius:14px;padding:14px;text-align:center;border-top:4px solid #F0B429;display:flex;flex-direction:column;align-items:center;gap:7px">
+        <div style="font-size:32px">🔊</div>
+        <div style="font-size:14px;font-weight:800;color:#1B3461">הצליל VOOO</div>
+        <div style="font-size:13px;line-height:1.6;color:#1f2d3a;text-align:right">לשים יד על הגרון ולהשמיע VOOO. לחזור עד שהגרון נפתח ומרגיש פחות חנוק.</div>
       </div>
     </div>
     <div class="card" style="font-size:14px">
-      <strong>פירוט נשימות (3):</strong><br>
+      <strong>פירוט נשימות (3) – מתקדם:</strong><br>
       ◆ לשאוף לאט דרך האף, להרגיש הגוף מתמלא ואת היד שעל הבטן עולה<br>
       ◆ לנשוף לאט דרך הפה ולהרגיש את היד יורדת עם הבטן<br>
       ◆ לשאוף, להחזיק, לנשוף בספירת שלוש<br>
       ◆ לשאוף, לנשוף בזמזום <strong>SSSS</strong> – להרגיש בבית החזה<br>
       ◆ לשאוף, לנשוף ב-<strong>המםםם</strong> – להרגיש את ההמהום בגרון
     </div>
-    <div class="sec-sm">חימום ידיים</div>
-    <div class="txt" style="font-size:14px"><p>ידיים קרות הן לרוב סימן שהאדם חווה לחץ ואיום. חימום הידיים יאפשר למערכת ההרגעה הפרה-סימפטית להוריד את רמת הדריכות.</p></div>
-    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
-      <div style="background:#EBF2FA;border-radius:12px;padding:14px;text-align:center;border-top:3px solid #2B5BA8;display:flex;flex-direction:column;align-items:center;gap:6px">
-        <div style="font-size:26px">🌡️</div>
-        <div style="font-size:13px;font-weight:700;color:#1B3461">שלב 1 – שים לב</div>
-        <div style="font-size:12.5px;color:#1f2d3a;text-align:right">האם הידיים קרות? סימן שהגוף דרוך.</div>
-      </div>
-      <div style="background:#EBF2FA;border-radius:12px;padding:14px;text-align:center;border-top:3px solid #2B5BA8;display:flex;flex-direction:column;align-items:center;gap:6px">
-        <div style="font-size:26px">🔥</div>
-        <div style="font-size:13px;font-weight:700;color:#1B3461">שלב 2 – דמיין חום</div>
-        <div style="font-size:12.5px;color:#1f2d3a;text-align:right">לדמיין מקור חום: מדורה / תנור / מים חמים.</div>
-      </div>
-      <div style="background:#EBF2FA;border-radius:12px;padding:14px;text-align:center;border-top:3px solid #F0B429;display:flex;flex-direction:column;align-items:center;gap:6px">
-        <div style="font-size:26px">✨</div>
-        <div style="font-size:13px;font-weight:700;color:#1B3461">שלב 3 – חום נעים</div>
-        <div style="font-size:12.5px;color:#1f2d3a;text-align:right">גל חום עוטף. אם עדיין קרות – לשפשף זו בזו.</div>
-      </div>
-    </div>
   </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">20 / 27</div></div>
+  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">15 / 22</div></div>
 </div>
 
 
 <!-- ══ התערבות מיידית ילדים 1 + עזרה ראשונה 2 ══ -->
 <div class="page" id="p-kids-tools1">
-  <div class="header">👧 התערבות מיידית בחירום עם ילדים (1) <span class="phase">צ כלים מעשיים</span></div>
+  <div class="header">🤸 כלים גופניים לקרקוע וויסות <span class="phase">כלים מעשיים</span></div>
   <div class="body">
-    <div class="grid2">
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <div class="sec-sm">קרקוע גופני</div>
-        <div class="card" style="font-size:14px">🏃 <strong>קפיצות וספירתן</strong> – 20 קפיצות, נשימה עמוקה וחזרה. רצוי תוך אחיזת ידיים בזוג.</div>
-        <div class="card" style="font-size:14px">🤝 <strong>דחיפת ידיים</strong> – לעמוד אחד מול השני, כפות הידיים זו לנגד זו, לדחוף הכי חזק שניתן.</div>
-        <div class="card" style="font-size:14px">🔴 <strong>כדור רך</strong> – למעוך חזק, לנער, להעביר מיד ליד בלי לדבר. להתמקד בתחושה ובצליל.</div>
-        <div class="card" style="font-size:14px">💨 <strong>קשים ופונפונים</strong> – תחרות נשיפה מקצה לקצה, כדורגל ועוד.</div>
-        <div class="sec-sm" style="margin-top:4px">כלי גוף נוספים (מעזרה ראשונה)</div>
-        <div class="card" style="font-size:14px">✊ <strong>אגרוף כפות הידיים</strong> – לחיצה על האגודלים פותחת דרכי נשימה.</div>
-        <div class="card" style="font-size:14px">🦋 <strong>חיבוק פרפר</strong> – 25 תיפופים מהירים על הזרועות מצד לצד לסירוגין.</div>
-        <div class="card" style="font-size:14px">🍭 <strong>סוכריה על מקל</strong> – הסוכר מרגיע, המציצה מונעת היפר-ונטילציה.</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px">
+      <div style="background:#EBF2FA;border-radius:14px;padding:14px;text-align:center;border-top:4px solid #2B5BA8;display:flex;flex-direction:column;align-items:center;gap:7px">
+        <div style="font-size:32px">🏃</div>
+        <div style="font-size:14px;font-weight:800;color:#1B3461">קפיצות</div>
+        <div style="font-size:13px;line-height:1.6;color:#1f2d3a;text-align:right">20 קפיצות, נשימה עמוקה וחזרה. רצוי תוך אחיזת ידיים בזוג.</div>
       </div>
-      <div style="display:flex;flex-direction:column;gap:8px">
-        <div class="sec-sm">כלי נשימה נוספים</div>
-        <div class="card" style="font-size:14px">🐟 <strong>תנועות דג</strong> – סגירה ופתיחת הפה, לבצע כשיש מתח בלסת.</div>
-        <div class="card" style="font-size:14px">🎈 <strong>לנפח בלון / שקית נייר, לנשוף במפוחית, להפריח בועות סבון</strong> – להסדרת הנשימה.</div>
-        <div class="card" style="font-size:14px">🔊 <strong>הצליל VOOO</strong> – לשחרר תחושת מחנק בגרון, לחזור עד שנפתח. לשים יד על הגרון.</div>
-        <div class="sec-sm" style="margin-top:4px">קרקוע והרפיה</div>
-        <div class="card" style="font-size:14px">⚓ <strong>קרקוע</strong> – לדחוף קיר / להיות כמו עץ.</div>
-        <div class="card" style="font-size:14px">🤏 <strong>התנועה הכי קטנה</strong> – "מה התנועה הכי קטנה שהיית יכול לעשות?" למשל: להזיז בהונות.</div>
-        <div class="card" style="font-size:14px">💪 <strong>הרפיה מהירה</strong> – למתוח ידיים מעלה ← להתכווץ לתנוחת עובר ← להרפות ולנשום.</div>
-        <div class="card card-gold" style="font-size:14px">🌬️ <strong>נשימות מובנות</strong> – יד מעלה: שאיפה (3), עצירה (2). יד למטה: נשיפה (6-8), עצירה (2). חזור – מטרה: 5 דקות.</div>
+      <div style="background:#EBF2FA;border-radius:14px;padding:14px;text-align:center;border-top:4px solid #2B5BA8;display:flex;flex-direction:column;align-items:center;gap:7px">
+        <div style="font-size:32px">🤝</div>
+        <div style="font-size:14px;font-weight:800;color:#1B3461">דחיפת ידיים</div>
+        <div style="font-size:13px;line-height:1.6;color:#1f2d3a;text-align:right">לעמוד אחד מול השני, כפות ידיים זו לנגד זו. לדחוף הכי חזק שניתן.</div>
+      </div>
+      <div style="background:#EBF2FA;border-radius:14px;padding:14px;text-align:center;border-top:4px solid #2B5BA8;display:flex;flex-direction:column;align-items:center;gap:7px">
+        <div style="font-size:32px">🔴</div>
+        <div style="font-size:14px;font-weight:800;color:#1B3461">כדור רך</div>
+        <div style="font-size:13px;line-height:1.6;color:#1f2d3a;text-align:right">למעוך חזק, לנער, להעביר מיד ליד בלי לדבר. להתמקד בתחושה ובצליל.</div>
+      </div>
+      <div style="background:#EBF2FA;border-radius:14px;padding:14px;text-align:center;border-top:4px solid #2B5BA8;display:flex;flex-direction:column;align-items:center;gap:7px">
+        <div style="font-size:32px">✊</div>
+        <div style="font-size:14px;font-weight:800;color:#1B3461">אגרוף כפות הידיים</div>
+        <div style="font-size:13px;line-height:1.6;color:#1f2d3a;text-align:right">לחיצה חזקה על האגודלים פותחת דרכי נשימה ומפחיתה מתח.</div>
+      </div>
+      <div style="background:#EBF2FA;border-radius:14px;padding:14px;text-align:center;border-top:4px solid #2B5BA8;display:flex;flex-direction:column;align-items:center;gap:7px">
+        <div style="font-size:32px">🦋</div>
+        <div style="font-size:14px;font-weight:800;color:#1B3461">חיבוק פרפר</div>
+        <div style="font-size:13px;line-height:1.6;color:#1f2d3a;text-align:right">25 תיפופים מהירים על הזרועות מצד לצד לסירוגין.</div>
+      </div>
+      <div style="background:#EBF2FA;border-radius:14px;padding:14px;text-align:center;border-top:4px solid #F0B429;display:flex;flex-direction:column;align-items:center;gap:7px">
+        <div style="font-size:32px">⚓</div>
+        <div style="font-size:14px;font-weight:800;color:#1B3461">קרקוע</div>
+        <div style="font-size:13px;line-height:1.6;color:#1f2d3a;text-align:right">לדחוף קיר / להיות כמו עץ. לדחוף משענת הכיסא עם הגב. לשים לב לרגליים על הקרקע.</div>
+      </div>
+      <div style="background:#EBF2FA;border-radius:14px;padding:14px;text-align:center;border-top:4px solid #F0B429;display:flex;flex-direction:column;align-items:center;gap:7px">
+        <div style="font-size:32px">🤏</div>
+        <div style="font-size:14px;font-weight:800;color:#1B3461">התנועה הכי קטנה</div>
+        <div style="font-size:13px;line-height:1.6;color:#1f2d3a;text-align:right">"מה התנועה הכי קטנה שהיית יכול לעשות?" למשל: להזיז בהונות.</div>
+      </div>
+      <div style="background:#EBF2FA;border-radius:14px;padding:14px;text-align:center;border-top:4px solid #F0B429;display:flex;flex-direction:column;align-items:center;gap:7px">
+        <div style="font-size:32px">💪</div>
+        <div style="font-size:14px;font-weight:800;color:#1B3461">הרפיה מהירה</div>
+        <div style="font-size:13px;line-height:1.6;color:#1f2d3a;text-align:right">למתוח ידיים מעלה ← להתכווץ לתנוחת עובר ← להרפות ולנשום.</div>
+      </div>
+      <div style="background:#EBF2FA;border-radius:14px;padding:14px;text-align:center;border-top:4px solid #F0B429;display:flex;flex-direction:column;align-items:center;gap:7px">
+        <div style="font-size:32px">🍭</div>
+        <div style="font-size:14px;font-weight:800;color:#1B3461">סוכריה על מקל</div>
+        <div style="font-size:13px;line-height:1.6;color:#1f2d3a;text-align:right">הסוכר מרגיע, המציצה מונעת היפר-ונטילציה.</div>
       </div>
     </div>
   </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">21 / 27</div></div>
+  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">16 / 22</div></div>
 </div>
 
 
 <!-- ══ התערבות מיידית ילדים 2 ══ -->
 <div class="page" id="p-kids-tools2">
-  <div class="header">👧 התערבות מיידית בחירום עם ילדים (2) <span class="phase">צ כלים מעשיים</span></div>
+  <div class="header">🎯 טכניקת הקרקוע 5-4-3-2-1 <span class="phase">כלים מעשיים</span></div>
   <div class="body">
     <div style="display:flex;flex-direction:column;gap:10px">
-      <div style="font-size:13px;font-weight:700;color:#2B5BA8">משימות שדורשות תנועה ומיקוד החושים – 5-4-3-2-1</div>
+      <div class="txt"><p>טכניקת הקרקוע 5-4-3-2-1 היא כלי יעיל להרגעה וחיבור להווה, המשתמשת בחושים כדי להפחית חרדה. התרגיל מחזיר את הקשב מהמוח החרדתי לסביבה המיידית.</p></div>
       <div class="card" style="padding:0">
         <div class="sense-row"><div class="sense-num">5</div><div>דברים שאת/ה <strong>רואה</strong></div></div>
         <div class="sense-row"><div class="sense-num">4</div><div>דברים שאת/ה יכול/ה <strong>להרגיש</strong></div></div>
@@ -779,56 +792,44 @@
         <div class="sense-row"><div class="sense-num">2</div><div>דברים שאת/ה יכול/ה <strong>להריח</strong></div></div>
         <div class="sense-row"><div class="sense-num">1</div><div>דבר שאת/ה יכול/ה <strong>לטעום</strong></div></div>
       </div>
-      <div class="card">
-        <strong>⚓ חיזוק האוריינטציה בזמן הווה</strong><br>
-        ◆ לתת לילד לאחוז באבן ולחוש את המגע<br>
-        ◆ לקפוץ על רגל אחת ולספור 1,2,3,4 – לפתוח ולסגור עיניים, ולמנות 4 חפצים בחדר<br>
-        ◆ לנשום נשימה עמוקה ולספור עד 10 (לספור יחד עם הילד)<br>
-        ◆ אוריינטציה עם הגוף: לדחוף משענת הכיסא עם הגב, ללחוץ כפות ידיים זו מול זו, אגרוף מול אגרוף, ולפתוח אצבעות לפי הסדר: אגודל, אצבע, אמה, קמיצה, זרת
-      </div>
-      <div class="card">
-        <strong>🏡 לחזור אל המקום הבטוח</strong><br>
-        לבקש מהילד לדמיין מקום בטוח. לשאול:<br>
-        ◆ איזה צבעים מאפיינים את המקום? &nbsp;◆ מה הריחות שאפשר להריח?<br>
-        ◆ מה אפשר לשמוע שם? &nbsp;◆ האם הוא לבד או מי שם איתו?<br>
-        ◆ אפשר לתת לילד לצייר את המקום הבטוח
-      </div>
     </div>
   </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">22 / 27</div></div>
+  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">17 / 22</div></div>
 </div>
 
 
 <!-- ══ הרפיית ג'ייקובסון ══ -->
 <div class="page" id="p-jacobson-tools">
-  <div class="header">🧘 הרפיית ג׳ייקובסון לילדים <span class="phase">צ כלים מעשיים</span></div>
+  <div class="header">🧘 הרפיית שרירים הדרגתית (PMR) – שיטת ג׳ייקובסון <span class="phase">כלים מעשיים</span></div>
   <div class="body">
+    <div class="txt"><p>הרפיית שרירים הדרגתית (Progressive Muscle Relaxation) פותחה בשנת 1929 על ידי הפיזיולוג אדמונד ג׳ייקובסון. <strong>העיקרון המרכזי:</strong> מיתוח מכוון של קבוצת שרירים ← ואחריו הרפיה מלאה. הגוף אינו יכול להיות במתח ורגוע בו-זמנית — לאחר מיתוח, ההרפיה עמוקה יותר. מוכח מחקרית כיעיל לחרדה, לחץ ונדודי שינה.</p></div>
     <div style="display:flex;flex-direction:column;gap:9px">
+      <div class="bubble" style="font-size:13.5px">לכל תרגיל: מיתוח חזק 5-7 שניות ← הרפיה מלאה 20-30 שניות ← שים לב לתחושת ההרפיה</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
-        <div class="card" style="padding:10px 13px;font-size:14px">🤜 <strong>כדור דמיוני</strong> – להעמיד פנים שמחזיקים כדור בין הידיים ולוחצים חזק, להרגיש שרירים מתכווצים. לשחרר, ללחוץ שוב.</div>
-        <div class="card" style="padding:10px 13px;font-size:14px">🙆 <strong>מתיחת ידיים</strong> – למתוח ידיים למעלה גבוה מעל הראש, לנסות לגעת בשמש, להתמתח עוד קצת, לשחרר ולתת לידיים לצנוח.</div>
-        <div class="card" style="padding:10px 13px;font-size:14px">🦵 <strong>בעיטת כדור</strong> – למתוח את הרגל, לבעוט בכדור דמיוני ולהרפות. לבעוט שוב. לעשות גם עם הרגל השנייה.</div>
-        <div class="card" style="padding:10px 13px;font-size:14px">🐌 <strong>חילזון בקונכייה</strong> – להכניס הסנטר, לקמר הצוואר, לקרב הכתפיים, להחזיק חזק. לשחרר.</div>
-        <div class="card" style="padding:10px 13px;grid-column:1/-1;font-size:14px">🍓 <strong>שדה תותים</strong> – ללכת יחף ולמעוך את התותים חזק עם כפות ואצבעות הרגליים. לאצבעות לנוח ולשים לב כמה נעימה התחושה.</div>
+        <div class="card" style="padding:10px 13px;font-size:14px">🤜 <strong>כדור דמיוני</strong> – להעמיד פנים שמחזיקים כדור בין הידיים. ללחוץ חזק חזק. להרגיש את השרירים מתכווצים. לשחרר לגמרי.</div>
+        <div class="card" style="padding:10px 13px;font-size:14px">🙆 <strong>מתיחת ידיים</strong> – למתוח ידיים למעלה גבוה מעל הראש, לנסות לגעת בשמש, להתמתח עוד קצת. לשחרר ולתת לידיים לצנוח לצדדים.</div>
+        <div class="card" style="padding:10px 13px;font-size:14px">🦵 <strong>בעיטת כדור</strong> – למתוח את הרגל קדימה, לבעוט בכדור דמיוני חזק ולהרפות. לחזור. לעשות גם עם הרגל השנייה.</div>
+        <div class="card" style="padding:10px 13px;font-size:14px">🐌 <strong>חילזון בקונכייה</strong> – להכניס הסנטר, לקמר הצוואר, לקרב הכתפיים, להחזיק חזק. לשחרר ולשים לב לתחושת הכתפיים יורדות.</div>
+        <div class="card" style="padding:10px 13px;grid-column:1/-1;font-size:14px">🍓 <strong>שדה תותים</strong> – ללכת יחף ולמעוך את התותים חזק עם כפות ואצבעות הרגליים. לאצבעות לנוח. לשים לב כמה נעימה התחושה לאחר ההרפיה.</div>
       </div>
       <div style="background:#EBF2FA;border-right:4px solid #2B5BA8;border-radius:10px;padding:12px 14px">
-        <div style="font-size:13px;font-weight:800;color:#1B3461;margin-bottom:6px">קרקוע ← חשוב לדבר בטון רגוע ואיטי</div>
+        <div style="font-size:13px;font-weight:800;color:#1B3461;margin-bottom:6px">קרקוע להתחלה ← חשוב לדבר בטון רגוע ואיטי</div>
         <div style="font-size:13.5px;line-height:1.7;color:#1f2d3a">
           ◆ לשבת בנוחות על הכיסא, לשים לב לנשימות<br>
           ◆ להרגיש את הגוף: הרגליים על הקרקע, הישבן על הכיסא, הגב על משענת הכיסא<br>
-          ◆ להסתכל מסביב וחפש/י 3 דברים בצבע לבן (כחול / עיגולים). למקד מבט, לסרוק ולהתעכב<br>
-          ◆ קח/י נשימה עמוקה, יישר/י את המבט – מצוין!
+          ◆ להסתכל מסביב ולחפש 3 דברים בצבע לבן. למקד מבט, לסרוק ולהתעכב<br>
+          ◆ לקחת נשימה עמוקה — רק אחרי כן מתחילים בתרגילים
         </div>
       </div>
     </div>
   </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">23 / 27</div></div>
+  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">18 / 22</div></div>
 </div>
 
 
 <!-- ══ 5 שלבים לניהול הרגשות ══ -->
 <div class="page" id="p-5steps-tools">
-  <div class="header">⚙️ 5 שלבים לניהול הרגשות בזמן חירום <span class="phase">צ כלים מעשיים</span></div>
+  <div class="header">⚙️ 5 שלבים לניהול הרגשות בזמן חירום <span class="phase">כלים מעשיים</span></div>
   <div class="body">
     <div class="txt"><p>מתוך סולם 1–10 דרגו את מידת המתח שאתם חשים כעת. <strong>מעל דרגה 6 – יש לבצע את השלבים הבאים. אם מתחת ל-6 – עברו ישר לשלבים 4 ו-5.</strong></p></div>
     <div class="steps">
@@ -840,49 +841,61 @@
     </div>
     <div class="important"><div class="imp-t">⚠️ חשוב</div>קודם כל השתמשו בכלים הללו עבור <strong>עצמכם</strong> לפני שאתם ניגשים לתת תמיכה לאחרים. כך תתגבר שרשרת החוסן ותמנע תגובת שרשרת מדבקת של פחד ולחץ.</div>
   </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">24 / 27</div></div>
+  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">19 / 22</div></div>
 </div>
 
 
-<!-- ══ כלים לטיפול ראשוני בנפגע חרדה ══ -->
+<!-- ══ דימיון מודרך ומנטליזציה ══ -->
 <div class="page" id="p-anxiety-tools">
-  <div class="header">🩺 כלים לטיפול ראשוני בנפגע חרדה <span class="phase">צ כלים מעשיים</span></div>
+  <div class="header">🏡 דימיון מודרך ומנטליזציה <span class="phase">כלים מעשיים</span></div>
   <div class="body">
-    <div style="font-size:13px;font-weight:700;color:#1B3461;text-align:center;margin-bottom:4px">הובלה לתפקוד: הצגה עצמית ← כלים פיזיים ← כלים תקשורתיים</div>
-    <div style="display:flex;flex-direction:column;gap:7px">
-      <div style="font-size:13px;font-weight:700;color:#2B5BA8">שלב 1 – פתיחת קשר ואמירות תמיכה</div>
-      <div class="grid2" style="gap:7px">
-        <div class="card card-green" style="padding:9px 13px;font-size:14px">💬 שלום... שמי... ואני כאן לעזור לך!</div>
-        <div class="card card-green" style="padding:9px 13px;font-size:14px">💬 אני איתך – את/ה לא לבד</div>
-        <div class="card card-green" style="padding:9px 13px;font-size:14px">💬 אני לא הולך עד שתרגיש/י בסדר</div>
-        <div class="card card-green" style="padding:9px 13px;font-size:14px">💬 היה מטח / שריפה... עכשיו זה נגמר. אנחנו במקום הכי בטוח שיש.</div>
+    <div style="display:flex;flex-direction:column;gap:9px">
+      <div class="txt"><p>דימיון מודרך ומנטליזציה הם טכניקות להרגעה עמוקה המשתמשות בדמיון ובחיבור לעולם הפנימי. הן מתאימות לאחר שהילד מעט רגוע, ומסייעות לעיבוד הרגשי ולחיזוק תחושת הביטחון.</p></div>
+
+      <div style="font-size:13px;font-weight:700;color:#2B5BA8">מקום בטוח</div>
+      <div class="card" style="font-size:14px">
+        לבקש לדמיין מקום בטוח. לשאול לאט ובטון רגוע:<br>
+        ◆ איזה צבעים מאפיינים את המקום?<br>
+        ◆ מה הריחות שאפשר להריח?<br>
+        ◆ מה אפשר לשמוע שם?<br>
+        ◆ האם הוא לבד או מי שם איתו?<br>
+        ◆ איך הגוף מרגיש במקום הזה? חם? קל? שקט?<br>
+        ◆ לדמיין שנושמים את אוויר המקום הזה לאט-לאט<br>
+        ◆ לדמיין שאפשר להישאר שם כמה שרוצים, ושהמקום בטוח לחלוטין<br>
+        ◆ אפשר לתת לצייר את המקום הבטוח לאחר התרגיל
       </div>
-      <div style="font-size:13px;font-weight:700;color:#2B5BA8">שלב 2 – כלים פיזיים לאיזון</div>
-      <div class="grid2" style="gap:7px">
-        <div class="card" style="padding:9px 13px;font-size:14px">🌬️ <strong>נשימות</strong> – נשיפה חזקה. שאיפה (2), עצירה (2), נשיפה (5). לעשות 3–4 חזרות.</div>
-        <div class="card" style="padding:9px 13px;font-size:14px">⚓ <strong>קרקוע</strong> – להרגיש הכיסא / רצפה, את היד (חמה/קרה), לחפש 3 דברים ירוקים, חיבוק פרפר.</div>
-        <div class="card" style="padding:9px 13px;font-size:14px">💚 <strong>נירמול</strong> – מה שאת/ה מרגיש/ה זה נורמלי. זו תגובה נורמלית למצב לא נורמלי. זה יעבור.</div>
+
+      <div style="font-size:13px;font-weight:700;color:#2B5BA8">דמות מגינה</div>
+      <div class="card" style="font-size:14px">
+        לבקש לדמיין דמות שמגינה ותומכת – אדם אמיתי, דמות דמיונית או גיבור אהוב.<br>
+        ◆ מי הדמות? איך היא נראית?<br>
+        ◆ מה היא אומרת לי עכשיו?<br>
+        ◆ איך אני מרגיש כשהיא לידי?<br>
+        ◆ לדמיין שהדמות שמה יד על הכתף ואומרת: "אני כאן, אתה בטוח"
       </div>
-      <div style="font-size:13px;font-weight:700;color:#2B5BA8">שלב 3 – שאלות ועידוד לתפקוד</div>
-      <div class="grid2" style="gap:7px">
-        <div class="card" style="padding:9px 13px;font-size:14px">❓ <strong>שאלות בחירה</strong> – את/ה רוצה לשתות חם או קר? לשבת כאן או ללכת הצידה?</div>
-        <div class="card" style="padding:9px 13px;font-size:14px">✅ <strong>YES SET</strong> – 3 שאלות שהתשובה עליהן היא "כן"</div>
-        <div class="card" style="padding:9px 13px;font-size:14px">👍 <strong>עידוד</strong> – יופי, אני רואה שהגוף קצת פחות רועד. מעולה.</div>
-        <div class="card" style="padding:9px 13px;font-size:14px">🔄 <strong>חזרה לתפקוד</strong> – מתן תפקיד: "את/ה רוצה לעזור לי ב...?"</div>
+
+      <div style="font-size:13px;font-weight:700;color:#2B5BA8">מנטליזציה – לתת שם לרגש</div>
+      <div class="card" style="font-size:14px">
+        לסייע לילד לזהות ולהמשיג את מה שהוא חווה:<br>
+        ◆ "אם לרגש שאתה מרגיש היה צבע – איזה צבע הוא?"<br>
+        ◆ "אם לרגש הזה היה גודל – כמה גדול הוא על סולם 1-10?"<br>
+        ◆ "איפה בגוף אתה מרגיש אותו?"<br>
+        ◆ "אם לרגש היה שם – איך היית קורא לו?"<br>
+        ◆ לאחר זיהוי: "עכשיו בוא ננשום לאט עד שהרגש ירד ב-2 נקודות"
       </div>
     </div>
   </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">25 / 27</div></div>
+  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">20 / 22</div></div>
 </div>
 
 
 <!-- ══ סימנים אופייניים ══ -->
 <div class="page" id="p-signs-tools">
-  <div class="header">⚠️ סימנים אופייניים לתגובת לחץ <span class="phase">צ אבחון</span></div>
+  <div class="header">⚠️ סימנים אופייניים לתגובת לחץ <span class="phase">אבחון</span></div>
   <div class="body" style="gap:8px">
     <div style="font-size:13px;color:#2d3e4a">לפעמים הסימנים יופיעו מיד לאחר האירוע ולפעמים לאחר שעות או ימים</div>
     <table class="tbl">
-      <tr><th>תגובות התנהגותיות</th><th>תגובות רגשיות</th><th>תגובות קוגניטיביות</th><th>תגובות פיזיולוגיות</th></tr>
+      <tr><th style="text-align:right">תגובות התנהגותיות</th><th style="text-align:right">תגובות רגשיות</th><th style="text-align:right">תגובות קוגניטיביות</th><th style="text-align:right">תגובות פיזיולוגיות</th></tr>
       <tr><td>תנועות פתאומיות</td><td>חרדה</td><td>להאשים מישהו</td><td>תשישות</td></tr>
       <tr><td>שינויים קיצוניים בפעילות</td><td>אשמה</td><td>בלבול</td><td>בחילה</td></tr>
       <tr><td>שינויים בדפוסי ביטוי מילולי</td><td>חשש</td><td>קשב מועט</td><td>רעד שרירים / עוויתות</td></tr>
@@ -901,13 +914,13 @@
       <tr><td>תגובת בהלה ועוד...</td><td>ועוד...</td><td></td><td>ועוד...</td></tr>
     </table>
   </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">26 / 27</div></div>
+  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">21 / 22</div></div>
 </div>
 
 
 <!-- ══ טלפונים לשעת חירום ══ -->
 <div class="page" id="p-phones-tools">
-  <div class="header">☎️ טלפונים לשעת חירום <span class="phase">צ מידע</span></div>
+  <div class="header">☎️ טלפונים לשעת חירום <span class="phase">מידע</span></div>
   <div class="body" style="justify-content:center;gap:18px">
     <div>
       <div class="sec" style="text-align:center;margin-bottom:12px">📞 שירות פסיכולוגי חינוכי – קריית ים</div>
@@ -933,7 +946,7 @@
       </div>
     </div>
   </div>
-  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">27 / 27</div></div>
+  <div class="pf"><div style="display:flex;align-items:center;gap:10px"><div class="pf-org">שירות פסיכולוגי חינוכי קריית ים</div><div class="pf-contacts"><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A18 18 0 014 6a2 2 0 012-2z"/></svg></div>04-875-1909</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="12" rx="2"/><path d="M7 8V5a1 1 0 011-1h8a1 1 0 011 1v3"/><line x1="8" y1="14" x2="12" y2="14"/><line x1="8" y1="17" x2="16" y2="17"/></svg></div>04-874-7389</div><div class="pf-item"><div class="ci"><svg viewBox="0 0 24 24"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 14 6 14s6-8.7 6-14c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2" stroke="#fff" fill="none"/></svg></div>רח׳ הנגב 2, קריית ים ד׳</div></div></div><div style="font-size:12px;font-weight:700;color:#1B3461;white-space:nowrap">22 / 22</div></div>
 </div>
 
 <button class="print-btn" onclick="window.print()">
